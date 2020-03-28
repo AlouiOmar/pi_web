@@ -1,0 +1,10 @@
+{% extends 'baseAdmin.html.twig' %}
+{% block headerTitle %}Ajouter utilisateur{% endblock headerTitle %}
+{% block body %}
+    {% block user %}   <li class="active treeview menu-open">  {% endblock user %}
+    {% block adduser %}   <li class="active"><a href="{{ path('velo_admin_add_user') }}"><i class="fa fa-user-plus"></i> Ajouter utilisateur</a></li>{% endblock adduser %}
+    <br>
+    <div class="container">
+        {{ form(form) }}
+    </div>
+{% endblock body %}

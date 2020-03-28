@@ -30,6 +30,18 @@ services:
         tags: ['controller.service_arguments']
 
     # add more services, or override services that need manual wiring
-    # AppBundle\Service\ExampleService:
-    #     arguments:
-    #         $someArgument: 'some_value'
+    AppBundle\Service\UtilsService:
+         public: true
+         arguments:
+             $fromEmail: 'pidevtest2020@gmail.com'
+    AppBundle\Controller\RegistrationController:
+        arguments:
+            $formFactory: '@fos_user.registration.form.factory'
+    AppBundle\Controller\ChangePasswordController:
+        arguments:
+            $formFactory: '@fos_user.change_password.form.factory'
+    AppBundle\Controller\ProfileController:
+        arguments:
+            $formFactory: '@fos_user.profile.form.factory'
+#    app.form.profile:
+#        class: AppBundle\Form\ProfileType

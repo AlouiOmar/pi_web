@@ -1,22 +1,108 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-{% if error %}
-    <div class="alert alert-danger" role="danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-{% endif %}
+{#{% if error %}#}
+    {#<div class="alert alert-danger" role="danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>#}
+{#{% endif %}#}
 
-<form  action="{{ path("fos_user_security_check") }}" method="post">
-    {% if csrf_token %}
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
-    {% endif %}
+{#<form  action="{{ path("fos_user_security_check") }}" method="post">#}
+    {#{% if csrf_token %}#}
+        {#<input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />#}
+    {#{% endif %}#}
 
-    <label for="username">{{ 'security.login.username'|trans }}</label>
-    <input class="form-control" type="text" id="username" name="_username" value="{{ last_username }}" required="required" autocomplete="username" />
+    {#<label for="username">{{ 'security.login.username'|trans }}</label>#}
+    {#<input class="form-control" type="text" id="username" name="_username" value="{{ last_username }}" required="required" autocomplete="username" />#}
 
-    <label for="password">{{ 'security.login.password'|trans }}</label>
-    <input class="form-control" type="password" id="password" name="_password" required="required" autocomplete="current-password" />
+    {#<label for="password">{{ 'security.login.password'|trans }}</label>#}
+    {#<input class="form-control" type="password" id="password" name="_password" required="required" autocomplete="current-password" />#}
 
-    <input  class="p-2" type="checkbox" id="remember_me" name="_remember_me" value="on" />
-    <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
+    {#<input  class="p-2" type="checkbox" id="remember_me" name="_remember_me" value="on" />#}
+    {#<label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>#}
 
-    <input class="form-control" type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
-</form>
+    {#<input class="form-control" type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />#}
+{#</form>#}
+<!--================login_part Area =================-->
+<section class="login_part section_padding">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 col-md-6">
+                <div class="login_part_text text-center">
+                    <div class="login_part_text_iner">
+                        <h2>Nouveau dans notre site?</h2>
+                        <p>Des progrès sont réalisés dans le domaine de la science et de la technologie
+                            tous les jours, et un bon exemple de cela est le</p>
+                        <a href="{{ path('fos_user_security_register_override') }}" class="btn_3">{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="login_part_form">
+                    <div class="login_part_form_iner">
+                        <h3>Content de vous revoir! <br>
+                            Veuillez vous connecter maintenant</h3>
+                        {% if error %}
+                            <div class="alert alert-danger" role="danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                        {% endif %}
+                        <form  action="{{ path("fos_user_security_check") }}" method="post">
+                            {% if csrf_token %}
+                                <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                            {% endif %}
+                            <div class="col-md-12 form-group p_star">
+                                <label for="username">{{ 'security.login.username'|trans }}</label>
+                                <input class="form-control" placeholder="{{ 'security.login.username'|trans }}" type="text" id="username" name="_username" value="{{ last_username }}" required="required" autocomplete="username" />
+                            </div>
+                            <div class="col-md-12 form-group p_star">
+                                <label for="password">{{ 'security.login.password'|trans }}</label>
+                                <input class="form-control" placeholder="{{ 'security.login.password'|trans }}" type="password" id="password" name="_password" required="required" autocomplete="current-password" />
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <div class="creat_account d-flex align-items-center">
+                                    <input  class="p-2" type="checkbox" id="remember_me" name="_remember_me" value="on" />
+                                    <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
+                                </div>
+                                {#<button type="submit" value="submit" class="btn_3">#}
+                                    {#log in#}
+                                {#</button>#}
+                                <input class="btn_3" type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+                                <a class="lost_pass" href="{{ path('fos_user_resetting_request') }}">Mot de passe oublié</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================login_part end =================-->
+
+<!-- subscribe_area part start-->
+<section class="instagram_photo">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="instagram_photo_iner">
+                    <div class="single_instgram_photo">
+                        <img src="img/instagram/inst_1.png" alt="">
+                        <a href="#"><i class="ti-instagram"></i></a>
+                    </div>
+                    <div class="single_instgram_photo">
+                        <img src="img/instagram/inst_2.png" alt="">
+                        <a href="#"><i class="ti-instagram"></i></a>
+                    </div>
+                    <div class="single_instgram_photo">
+                        <img src="img/instagram/inst_3.png" alt="">
+                        <a href="#"><i class="ti-instagram"></i></a>
+                    </div>
+                    <div class="single_instgram_photo">
+                        <img src="img/instagram/inst_4.png" alt="">
+                        <a href="#"><i class="ti-instagram"></i></a>
+                    </div>
+                    <div class="single_instgram_photo">
+                        <img src="img/instagram/inst_5.png" alt="">
+                        <a href="#"><i class="ti-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--::subscribe_area part end::-->

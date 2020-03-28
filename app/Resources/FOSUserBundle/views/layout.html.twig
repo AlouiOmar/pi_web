@@ -5,11 +5,11 @@
 
 {% block body %}
     <div class="p-5 col-md-12 bg-white">
-<div class="p-5 col-lg-5" style="float:none;margin:auto;">
+<div class=" col-md-12" style="float:none;margin:auto;">
 {% if app.request.hasPreviousSession %}
     {% for type, messages in app.session.flashbag.all() %}
         {% for message in messages %}
-            <div class="flash-{{ type }}">
+            <div class="alert alert-{{ type }}">
                 {{ message }}
             </div>
         {% endfor %}

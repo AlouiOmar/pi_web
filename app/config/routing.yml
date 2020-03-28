@@ -1,3 +1,30 @@
+fos_user_edit_profile_override:
+    path: /profile/edit
+    defaults: { _controller: AppBundle:Profile:edit}
+fos_user_change_password_override:
+    path: /profile/change-password
+    defaults: { _controller: AppBundle:ChangePassword:changePassword}
+fos_user_security_register_override:
+    path: /register
+    defaults: { _controller: AppBundle:Registration:register }
+
+velo_admin_list_user:
+    path:     /admin/list
+    defaults: { _controller: VeloAnnonceBundle:AdminAnnonce:list }
+velo_admin_delete_user:
+    path:     /admin/delete/user/{id}
+    defaults: { _controller: VeloAnnonceBundle:AdminAnnonce:delete }
+velo_admin_edit_user:
+    path:     /admin/edit/user/{id}
+    defaults: { _controller: VeloAnnonceBundle:AdminAnnonce:edit }
+velo_admin_add_user:
+    path:     /admin/add
+    defaults: { _controller: AppBundle:Registration:add }
+
+velo_annonce:
+    resource: "@VeloAnnonceBundle/Resources/config/routing.yml"
+    prefix:   /
+
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
 

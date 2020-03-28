@@ -1,0 +1,44 @@
+{% extends 'baseAdmin.html.twig' %}
+{% block headerTitle %}Ajouter annonce{% endblock headerTitle %}
+{% block body %}
+    <br>
+    <div class="container">
+        {{ form(form) }}
+    </div>
+
+    <script src="{{ asset('js/a.js') }}"></script>
+
+{% endblock body %}
+{% block customjs %}
+    {% block annonce %}  <li class="active treeview menu-open"> {% endblock annonce %}
+{% block ajoutannonce %}<li class="active" ><a href="{{ path('velo_admin_add_annonce') }}"><i class="fa fa-plus"></i> Ajouter annonce</a></li>{% endblock ajoutannonce %}
+
+    <!-- custom js -->
+    <script src="{{ asset('js/custom1.js') }}"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('.js-datepicker').datepicker({
+                format: 'yyyy-mm-dd',
+                language: 'fr',
+                orientation: 'auto bottom'
+            });
+        });
+        (function($){
+            $.fn.datepicker.dates['fr'] = {
+                days: ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"],
+                daysShort: ["dim.", "lun.", "mar.", "mer.", "jeu.", "ven.", "sam."],
+                daysMin: ["d", "l", "ma", "me", "j", "v", "s"],
+                months: ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"],
+                monthsShort: ["janv.", "févr.", "mars", "avril", "mai", "juin", "juil.", "août", "sept.", "oct.", "nov.", "déc."],
+                today: "Aujourd'hui",
+                monthsTitle: "Mois",
+                clear: "Effacer",
+                weekStart: 1,
+                format: "dd/mm/yyyy"
+            };
+        }(jQuery));
+    </script>
+
+{% endblock customjs %}

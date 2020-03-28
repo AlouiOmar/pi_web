@@ -18,4 +18,32 @@ class DefaultController extends Controller
             'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
         ]);
     }
+
+
+    /**
+     * @Route("/annonce/404", name="notfound")
+     */
+    public function quatsentquatAction()
+    {
+        return $this->render("AppBundle::accessDenied.html.twig");
+    }
+
+    /**
+     * @Route("/home", name="redirected")
+     */
+    public function redirectToHomeAction()
+    {
+        $authChecker = $this->container->get('security.authorization_checker');
+        if($authChecker->isGranted('ROLE_ADMIN')){
+            return $this->render('@VeloAnnonce/admin/adminListAnnonce.html.twig');
+        }else if($authChecker->isGranted('ROLE_USER')){
+            return $this->render('default/index.html.twig', [
+                'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
+            ]);
+        }else{
+            return $this->render('@FOSUser/Security/login.html.twig');
+        }
+    }
+
+
 }

@@ -1,0 +1,91 @@
+{% trans_default_domain 'FOSUserBundle' %}
+<div class="container">
+    <div class="row my-2">
+        <div class="col-lg-8 order-lg-2">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a href="" data-target="#profile" data-toggle="tab" class="nav-link active">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a href="" data-target="#messages" data-toggle="tab" class="nav-link">Modifier profile</a>
+                </li>
+            </ul>
+            <div class="tab-content py-4">
+                <div class="tab-pane active" id="profile">
+                    <h5 class="mb-3">Nom</h5>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p class="mb-3">
+                                {{ user.nom }}
+                            </p><hr>
+                            <h5 class="mb-3">Prénom</h5>
+
+                            <p class="mb-3">{{ user.prenom }}</p><hr>
+                            <h5 class="mb-3">Age</h5>
+
+                            <p class="mb-3">{{ user.age }}</p><hr>
+                            <h5 class="mb-3">Numéro de téléphone</h5>
+
+                            <p class="mb-3">{{ user.telephone }}</p><hr>
+                            <h5 class="mb-3">Adresse e-mail</h5>
+
+                            <p class="mb-3">{{ user.email }}</p><hr>
+                            <h5 class="mb-3">Nom d'utilisateur</h5>
+
+                            <p class="mb-3">{{ user.username }}</p><hr>
+                            <h5 class="mb-3">Dernière connection</h5>
+
+                            <p class="mb-3">{{ user.lastLogin|date('d/m/Y - H:m') }}</p>
+
+                        </div>
+
+
+                    </div>
+                    <!--/row-->
+                </div>
+                <div class="tab-pane" id="messages">
+                    <div class="alert alert-info alert-dismissable">
+                        <a class="panel-close close" data-dismiss="alert">×</a> Dans cet onglet vous pouvez changer votre <strong>mot de passe et modifier vos informations du profile</strong>.
+                    </div>
+                    <table class="table table-hover table-striped">
+                        <tbody>
+                        <tr>
+                            <td>
+                                <span class="float-right font-weight-bold">*</span> Cliquez sur ce bouton pour changer votre mot de passe.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="float-right font-weight-bold"> </span> <a class="btn btn-primary" href="{{ path('fos_user_change_password') }}">Changer mot de passe</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="float-right font-weight-bold">*</span> Cliquez sur ce bouton pour modifer les informations de votre profile.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="float-right font-weight-bold"></span> <a class="btn btn-primary" href="{{ path('fos_user_profile_edit') }}">Modifier profile</a>
+                            </td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-lg-4 order-lg-1 text-center">
+            <img src="{{ asset( user.photo ) }}" class="mx-auto img-fluid img-circle d-block" alt="avatar">
+            <h6 class="mt-2">Photo de profile</h6>
+
+        </div>
+    </div>
+</div>
+
+
+
+{#<img src="{{ asset( user.photo ) }}">#}
+{#<p>{{ 'profile.show.username'|trans }}: {{ user.username }}</p>#}
+{#<p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>#}

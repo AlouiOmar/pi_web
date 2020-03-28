@@ -1,0 +1,174 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <!--================Home Banner Area =================-->
+    <!-- breadcrumb start-->
+    <section class="breadcrumb breadcrumb_bg">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-12">
+                    <div class="breadcrumb_iner">
+                        <div class="breadcrumb_iner_item">
+                            <p>Home / Category</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- breadcrumb start-->
+
+    <!--================Category Product Area =================-->
+    <section class="cat_product_area section_padding border_top">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="left_sidebar_area">
+                        <!--============================= search bar ================================-->
+                        <div class="input-group" style="padding-top: 16px;padding-bottom: 42px;">
+                            <input type="text" id="rech" class="form-control" placeholder="Rechercher...">
+                            <div class="input-group-append">
+                                <button class="btn btn-secondary" type="button" onclick="rech()" style="border-color: #ced4da;background-color: #e8f0f2;">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- end search bar -->
+                        <aside class="left_widgets p_filter_widgets sidebar_box_shadow">
+                            <div class="l_w_title">
+                                <h3>Catégories</h3>
+                            </div>
+                            <div class="widgets_inner">
+                                <ul class="list">
+
+                                    <li class="sub-menu">
+                                        <a href="#" class=" d-flex justify-content-between">
+                                            Vélo
+                                            <div class="right ti-plus"></div>
+                                        </a>
+                                        <ul>
+                                            <li>
+                                                <a href="{{ path('velo_recherche_type_velo_annonce',{'typeVelo':'Tout chemin'}) }}">Tout chemin</a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ path('velo_recherche_type_velo_annonce',{'typeVelo':'Hollandais'}) }}">Hollandais</a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ path('velo_recherche_type_velo_annonce',{'typeVelo':'Tout terrain'}) }}">Tout terrain</a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ path('velo_recherche_type_velo_annonce',{'typeVelo':'Enfant'}) }}">Enfant</a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ path('velo_recherche_type_velo_annonce',{'typeVelo':'Course'}) }}">Course</a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ path('velo_recherche_type_velo_annonce',{'typeVelo':'Pliant'}) }}">Pliant</a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ path('velo_recherche_type_velo_annonce',{'typeVelo':'Couché'}) }}">Couché</a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ path('velo_recherche_type_velo_annonce',{'typeVelo':'Remorques'}) }}">Remorques</a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ path('velo_recherche_categorie_annonce',{'categorie':'Vélo'}) }}">Tout les types</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('velo_recherche_categorie_annonce',{'categorie':'Pièce de rechange'}) }}">Pièce de rechange</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('velo_recherche_categorie_annonce',{'categorie':'Accessoire'}) }}">Accessoire</a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </aside>
+                        <aside class="left_widgets p_filter_widgets sidebar_box_shadow">
+                            <div class="l_w_title">
+                                <h3>Type de transaction</h3>
+                            </div>
+                            <div class="widgets_inner">
+                                <ul class="list">
+
+                                    <li class="sub-menu">
+                                        <a href="{{ path('velo_recherche_type_annonce',{'type':'Vente'}) }}" class=" d-flex justify-content-between">Vente</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('velo_recherche_type_annonce',{'type':'Location'}) }}">Location</a>
+                                    </li>
+
+
+                                </ul>
+                            </div>
+                        </aside>
+                        <aside class="left_widgets p_filter_widgets sidebar_box_shadow">
+                            <div class="l_w_title">
+                                <h3>Trier par</h3>
+                            </div>
+                            <div class="widgets_inner">
+                                <ul class="list">
+
+                                    <li class="sub-menu">
+                                        <a href="{{ path('velo_tri_prix_velo_annonce',{'choix':'desc'}) }}" class=" d-flex justify-content-between">Prix décroissant</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('velo_tri_prix_velo_annonce',{'choix':'asc'}) }}">Prix croissant</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('velo_tri_date_velo_annonce') }}">Le plus récent</a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </aside>
+
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="product_top_bar d-flex justify-content-between align-items-center">
+                                <div class="single_product_menu product_bar_item">
+                                    <h2>Liste des annonces</h2>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        {% if annonces!=null %}
+                       {% for annonce in annonces %} <div class="col-lg-4 col-sm-6">
+                            <div class="single_category_product">
+                                <div class="single_category_img">
+                                    <img src="{{ asset( annonce.photo) }}" alt="photo_annonce" style="width: 250px;height: 250px;">
+                                    <div class="category_social_icon">
+                                        <ul>
+                                            <li><a href="#"><i class="ti-heart"></i></a></li>
+                                            <li><a href="#"><i class="ti-bag"></i></a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="category_product_text">
+                                        <a href="{{ path("velo_afficher_annonce",{"id":annonce.ida}) }}"><h5>{{ annonce.titre }}</h5></a>
+                                        <p>{{ annonce.prix }} DT</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>{% endfor %}
+                        {% else %}
+                          <div style="margin-left: 18px;">Aucun résultat ne correspond à votre recherche!</div>
+                    {% endif %}
+                        {#<div class="col-lg-12 text-center">#}
+                            {#<a href="#" class="btn_2">More Items</a>#}
+                        {#</div>#}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================End Category Product Area =================-->
+{% endblock body %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/recherche.js') }}"></script>
+{% endblock javascripts %}

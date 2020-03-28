@@ -1,0 +1,68 @@
+velo_annonce_homepage:
+    path:     /
+    defaults: { _controller: VeloAnnonceBundle:Default:index }
+velo_list_annonce:
+    path:     /annonce/list
+    defaults: { _controller: VeloAnnonceBundle:Annonce:list }
+velo_afficher_annonce:
+    path:     /annonce/list/{id}
+    defaults: { _controller: VeloAnnonceBundle:Annonce:annonce }
+velo_ajouter_annonce:
+    path:     /annonce/add
+    defaults: { _controller: VeloAnnonceBundle:Annonce:add }
+velo_modifier_annonce:
+    path:     /annonce/edit/{id}
+    defaults: { _controller: VeloAnnonceBundle:Annonce:edit }
+velo_supprimer_annonce:
+    path:     /annonce/delete/{id}
+    defaults: { _controller: VeloAnnonceBundle:Annonce:delete }
+velo_signaler_annonce:
+    path:     /annonce/signal/{id}/{cause}
+    defaults: { _controller: VeloAnnonceBundle:Annonce:signal }
+velo_my_annonce:
+    path:     /annonce/mesannonces
+    defaults: { _controller: VeloAnnonceBundle:Annonce:myList }
+velo_recherche_categorie_annonce:
+    path:     /annonce/categorie/{categorie}
+    defaults: { _controller: VeloAnnonceBundle:Annonce:rechercheCategorie }
+velo_recherche_type_velo_annonce:
+    path:     /annonce/typevelo/{typeVelo}
+    defaults: { _controller: VeloAnnonceBundle:Annonce:rechercheTypeVelo }
+velo_tri_prix_velo_annonce:
+    path:     /annonce/triprix/{choix}
+    defaults: { _controller: VeloAnnonceBundle:Annonce:triPrix }
+velo_tri_date_velo_annonce:
+    path:     /annonce/tridate
+    defaults: { _controller: VeloAnnonceBundle:Annonce:triDate }
+velo_recherche_annonce:
+    path:     /annonce/recherche/{recherche}
+    defaults: { _controller: VeloAnnonceBundle:Annonce:recherche }
+velo_recherche_type_annonce:
+    path:     /annonce/recherche/type/{type}
+    defaults: { _controller: VeloAnnonceBundle:Annonce:rechercheType }
+velo_admin_annonce:
+    path:     /admin
+    defaults: { _controller: VeloAnnonceBundle:AdminAnnonce:index }
+velo_admin_list_annonce:
+    path:     /admin/annonce/list
+    defaults: { _controller: VeloAnnonceBundle:AdminAnnonce:listAnnonce }
+velo_admin_affiche_annonce:
+    path:     /admin/annonce/list/{id}
+    defaults: { _controller: VeloAnnonceBundle:AdminAnnonce:afficheAnnonce }
+velo_admin_add_annonce:
+    path:     /admin/annonce/add
+    defaults: { _controller: VeloAnnonceBundle:AdminAnnonce:addAnnonce }
+velo_admin_edit_annonce:
+    path:     /admin/annonce/edit/{id}
+    defaults: { _controller: VeloAnnonceBundle:AdminAnnonce:editAnnonce }
+velo_admin_delete_annonce:
+    path:     /admin/annonce/delete/{id}
+    defaults: { _controller: VeloAnnonceBundle:AdminAnnonce:deleteAnnonce }
+velo_admin_signaled_annonce:
+    path:     /admin/annonce/signaledlist/
+    defaults: { _controller: VeloAnnonceBundle:AdminAnnonce:listAnnonceSignalee }
+
+
+velo_admin_profile_user:
+    path:     /admin/user/{id}
+    defaults: { _controller: VeloAnnonceBundle:AdminAnnonce:profile }
