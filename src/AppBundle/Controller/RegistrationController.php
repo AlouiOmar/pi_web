@@ -31,6 +31,10 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\HttpFoundation\JsonResponse;
+
 
 /**
  * Controller managing the registration.
@@ -58,12 +62,11 @@ class RegistrationController extends BaseController
      *
      * @return Response
      */
-    public function registerAction(Request $request)
+    public function registerUserAction(Request $request)
     {
 
         //$user=new User();
 //        dump('custom controller');
-//        die();
         $user = $this->userManager->createUser();
         $user->setEnabled(true);
 
@@ -80,13 +83,18 @@ class RegistrationController extends BaseController
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
+            dump($user);
+
             if ($form->isValid()) {
+
                 $event = new FormEvent($form, $request);
                 $this->eventDispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
                 $file=$form['photo']->getData();
                 $newImageName=md5(uniqid()).'.'.$file->guessExtension();
                 $file->move($this->getParameter('user_image'),$newImageName);
+
                 $user->setPhoto($newImageName);
+
 
                 $this->userManager->updateUser($user);
 
@@ -274,5 +282,104 @@ class RegistrationController extends BaseController
         }
 
         return null;
+    }
+
+    public function loginmAction(Request $request)
+    {
+        $response = new Response();
+        $request->setMethod('POST');
+        $request->headers->set("Content-Type","text/plain");
+
+        $username = $request->get('username', '');
+        $password = $request->get('password', '');
+
+        $user_manager = $this->get('fos_user.user_manager');
+        $factory = $this->get('security.encoder_factory');
+
+        $user = $user_manager->findUserByUsernameOrEmail($username);
+
+        if ($user == Null){
+            $response->setContent('Failed');
+            return $response;
+        }
+
+        $encoder = $factory->getEncoder($user);
+
+
+
+        if ($encoder->isPasswordValid($user->getPassword(), $password, $user->getSalt())){
+            $response->headers->set("Content-Type","application/json");
+            $response->setContent(json_encode(array(
+                        "id" => $user->getId(),
+                        "username" => $user->getUsername(),
+                        "nom" => $user->getNom(),
+                        "prenom" => $user->getPrenom(),
+                        "email" => $user->getEmail(),
+                        "photo" => $user->getPhot(),
+                        "roles" => $user->getRoles(),
+                        "telephone" =>(string) $user->getTelephone(),
+                    )
+                )
+            );
+        }else{
+            $response->setContent('Failed');
+        }
+
+        return $response;
+    }
+
+    public function registermAction(Request $request)
+    {
+        $user_manager = $this->get('fos_user.user_manager');
+        $factory = $this->get('security.encoder_factory');
+
+        $user = $user_manager->findUserByUsernameOrEmail($request->get('username'));
+        $user1 = $user_manager->findUserByUsernameOrEmail($request->get('email'));
+//        dump($user);
+//        dump($user1);
+//        die();
+        if (($user==null)&&($user1==null))
+        {
+            $user=new User();
+            $user->setNom($request->get('nom'));
+            $user->setPrenom($request->get('prenom'));
+            $user->setPhoto($request->get('photo'));
+            $user->setTelephone($request->get('telephone'));
+            $user->setEmail($request->get('email'));
+            $user->setEmailCanonical($request->get('email'));
+            $user->setUsername($request->get('username'));
+            $user->setUsernameCanonical($request->get('username'));
+            $user->setRoles(array ($request->get('roles')));
+
+            $encoderService = $this->container->get('security.password_encoder');
+
+            $user->setPassword($encoderService->encodePassword($user,$request->get('password')));
+
+            $user->setEnabled(true);
+
+            $em=$this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+            $user_manager = $this->get('fos_user.user_manager');
+            $user = $user_manager->findUserByUsernameOrEmail($request->get('username'));
+
+
+            $serializer = new Serializer([new ObjectNormalizer()]);
+            $formatted = $serializer->normalize(array(
+                "id" => $user->getId(),
+                "username" => $user->getUsername(),
+                "email" => $user->getEmail(),
+                //"telephone" => $user->getTelephone(),
+                "roles" => $user->getRoles(),
+            ));
+        }
+        else
+        {
+            $serializer = new Serializer([new ObjectNormalizer()]);
+            $formatted= $serializer->normalize('Failed');
+        }
+
+
+        return new JsonResponse($formatted);
     }
 }

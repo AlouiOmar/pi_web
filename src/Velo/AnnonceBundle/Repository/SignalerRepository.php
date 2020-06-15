@@ -90,5 +90,22 @@ class SignalerRepository extends EntityRepository
             ->getResult();
     }
 
+    public function findCountSignaledCause()
+    {
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT COUNT(s.ids) as nombre, s.cause FROM AppBundle:Signaler as s GROUP BY s.cause'
+            )
+            ->getResult();
+    }
+
+    public function findCountSignaledCategorie()
+    {
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT COUNT(s.ida) as nombre, a.categorie FROM AppBundle:Signaler as s JOIN AppBundle:Annonce as a with s.ida=a.ida GROUP BY a.categorie'
+            )
+            ->getResult();
+    }
 
 }

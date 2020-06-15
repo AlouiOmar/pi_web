@@ -7,6 +7,7 @@ use AppBundle\Entity\Signaler;
 use AppBundle\Form\AnnonceType;
 use AppBundle\Form\EditAnnonceType;
 use AppBundle\Service\UtilsService;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,9 +17,15 @@ use Symfony\Component\HttpFoundation\File\File;
 
 class AnnonceController extends Controller
 {
-    public function listAction()
+    public function listAction( Request $request)
     {
         $annonces=$this->getDoctrine()->getRepository(Annonce::class)->findAllActive();
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $annonces, /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            9 /*limit per page*/
+        );
         $usr= $this->container->get('security.token_storage')->getToken()->getUser();
 //        if($usr->getRoles()[0]=='ROLE_USER'){
 //            dump('user connected');
@@ -28,15 +35,22 @@ class AnnonceController extends Controller
 //        }
 //        dump($usr->getRoles());
 //        dump($usr);
-//        dump($annonces);
+//        dump($pagination);
 //        die();
-        return $this->render('@VeloAnnonce/user/listAnnonce.html.twig', array( 'annonces'=>$annonces));
+        return $this->render('@VeloAnnonce/user/listAnnonce.html.twig', array( 'annonces'=>$pagination));
     }
 
     public function myListAction()
     {
         $usr= $this->container->get('security.token_storage')->getToken()->getUser();
-        $annonces=$this->getDoctrine()->getRepository(Annonce::class)->findAllMyAnnonces($usr->getId());
+//        dump($usr);
+        if($usr!='anon.') {
+            $annonces = $this->getDoctrine()->getRepository(Annonce::class)->findAllMyAnnonces($usr->getId());
+            return $this->render('@VeloAnnonce/user/mesAnnonces.html.twig', array( 'annonces'=>$annonces));
+
+        }else{
+           return $this->redirectToRoute('notfound');
+        }
 //        if($usr->getRoles()[0]=='ROLE_USER'){
 //            dump('user connected');
 //        }
@@ -47,7 +61,6 @@ class AnnonceController extends Controller
 //        dump($usr);
 //        dump($annonces);
 //        die();
-        return $this->render('@VeloAnnonce/user/mesAnnonces.html.twig', array( 'annonces'=>$annonces));
     }
 
     public function annonceAction($id)
@@ -56,7 +69,7 @@ class AnnonceController extends Controller
         $annonce1=$this->getDoctrine()->getRepository(Annonce::class)->getAnnonce($id);
         dump($annonce);
         dump($annonce1);
-
+//        die();
         return $this->render('@VeloAnnonce/user/annonce.html.twig', array( 'annonce'=>$annonce));
     }
 
@@ -95,7 +108,7 @@ class AnnonceController extends Controller
             $annonce->setDatep($date);
             dump($annonce);
 //            die();
-            $this->sendMail($nomprenom,$email,$mailer);
+            $this->sendMail($nomprenom,$annonce->getTitre(),$annonce->getDatep(),$email,$mailer);
             $em=$this->getDoctrine()->getManager();
             $em->persist($annonce);
             $em->flush();
@@ -157,7 +170,7 @@ class AnnonceController extends Controller
 
     }
 
-    public function deleteAction($id)
+    public function deleteAction(Request $request,$id)
     {
         $usr= $this->container->get('security.token_storage')->getToken()->getUser();
         $annonce = $this->getDoctrine()->getRepository(Annonce::class)->find($id);
@@ -175,7 +188,7 @@ class AnnonceController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->remove($annonce);
             $em->flush();
-            return $this->listAction();
+            return $this->listAction($request);
         }else{
             //redirect error page
             //dump('error champs invalides');
@@ -189,7 +202,7 @@ class AnnonceController extends Controller
         }
     }
 
-    public function signalAction($id,$cause)
+    public function signalAction(Request $request,$id,$cause)
     {
         $signal=new Signaler();
         $annonce=$this->getDoctrine()->getRepository(Annonce::class)->find($id);
@@ -202,7 +215,7 @@ class AnnonceController extends Controller
             $em=$this->getDoctrine()->getManager();
             $em->persist($signal);
             $em->flush();
-            return $this->listAction();
+            return $this->listAction($request);
         }else{
             //redirect error page
             //dump('error champs invalides');
@@ -219,60 +232,90 @@ class AnnonceController extends Controller
     }
 
 
-    public function rechercheCategorieAction($categorie)
+    public function rechercheCategorieAction($categorie,Request $request)
     {
         $annonces=$this->getDoctrine()->getRepository(Annonce::class)->findCategorieActive($categorie);
-
-        return $this->render('@VeloAnnonce/user/listAnnonce.html.twig', array( 'annonces'=>$annonces));
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $annonces, /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            9 /*limit per page*/
+        );
+        return $this->render('@VeloAnnonce/user/listAnnonce.html.twig', array( 'annonces'=>$pagination));
     }
 
-    public function rechercheTypeVeloAction($typeVelo)
+    public function rechercheTypeVeloAction($typeVelo,Request $request)
     {
         $annonces=$this->getDoctrine()->getRepository(Annonce::class)->findTypeVeloActive($typeVelo);
-
-        return $this->render('@VeloAnnonce/user/listAnnonce.html.twig', array( 'annonces'=>$annonces));
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $annonces, /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            9 /*limit per page*/
+        );
+        return $this->render('@VeloAnnonce/user/listAnnonce.html.twig', array( 'annonces'=>$pagination));
     }
 
-    public function triPrixAction($choix)
+    public function triPrixAction($choix,Request $request)
     {
         $annonces=$this->getDoctrine()->getRepository(Annonce::class)->triPrixActive($choix);
-
-        return $this->render('@VeloAnnonce/user/listAnnonce.html.twig', array( 'annonces'=>$annonces));
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $annonces, /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            9 /*limit per page*/
+        );
+        return $this->render('@VeloAnnonce/user/listAnnonce.html.twig', array( 'annonces'=>$pagination));
     }
 
-    public function triDateAction()
+    public function triDateAction(Request $request)
     {
         $annonces=$this->getDoctrine()->getRepository(Annonce::class)->triDateActive();
-
-        return $this->render('@VeloAnnonce/user/listAnnonce.html.twig', array( 'annonces'=>$annonces));
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $annonces, /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            9 /*limit per page*/
+        );
+        return $this->render('@VeloAnnonce/user/listAnnonce.html.twig', array( 'annonces'=>$pagination));
     }
 
-    public function rechercheAction($recherche)
+    public function rechercheAction($recherche,Request $request)
     {
         $annonces=$this->getDoctrine()->getRepository(Annonce::class)->rechercheActive($recherche);
-
-        return $this->render('@VeloAnnonce/user/listAnnonce.html.twig', array( 'annonces'=>$annonces));
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $annonces, /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            9 /*limit per page*/
+        );
+        return $this->render('@VeloAnnonce/user/listAnnonce.html.twig', array( 'annonces'=>$pagination));
     }
 
-    public function rechercheTypeAction($type)
+    public function rechercheTypeAction($type,Request $request)
     {
         $annonces=$this->getDoctrine()->getRepository(Annonce::class)->rechercheTypeActive($type);
-
-        return $this->render('@VeloAnnonce/user/listAnnonce.html.twig', array( 'annonces'=>$annonces));
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $annonces, /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            9 /*limit per page*/
+        );
+        return $this->render('@VeloAnnonce/user/listAnnonce.html.twig', array( 'annonces'=>$pagination));
     }
 
-    public function sendMail($name,$email,\Swift_Mailer $mailer)
+    public function sendMail($name,$titre,$date,$email,\Swift_Mailer $mailer)
     {
 //        Velo\AnnonceBundle\Ressources\views\Emails\addAnnonceEmail.html.twig
 
-        $message = (new \Swift_Message('Hello Email'))
+        $message = (new \Swift_Message('Confirmation d\'Ajout'))
             ->setFrom('pidevtest2020@gmail.com')
             ->setTo($email)
             ->setBody(
                 $this->renderView(
                 // app/Resources/views/Emails/registration.html.twig
                     '@VeloAnnonce/Emails/addAnnonceEmail.html.twig',
-                    ['name' => $name]
+                    ['name' => $name,'titre' => $titre, 'date' => $date]
                 ),
 //                'hah',
                 'text/html'

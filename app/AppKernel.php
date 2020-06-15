@@ -4,6 +4,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
 
+
 class AppKernel extends Kernel
 {
     public function registerBundles()
@@ -19,6 +20,18 @@ class AppKernel extends Kernel
             new AppBundle\AppBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new Velo\AnnonceBundle\VeloAnnonceBundle(),
+            new BlogBundle\BlogBundle(),
+            new CMEN\GoogleChartsBundle\CMENGoogleChartsBundle(),
+            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+            new FOS\CKEditorBundle\FOSCKEditorBundle(),
+            new blackknight467\StarRatingBundle\StarRatingBundle(),
+            new ProductBundle\ProductBundle(),
+            new Gregwar\CaptchaBundle\GregwarCaptchaBundle(),
+            new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
+            new EventBundle\EventBundle(),
+            new PianoSolo\WeatherBundle\PianoSoloWeatherBundle(),
+//            new Dwr\OpenWeatherBundle\DwrOpenWeatherBundle(),
+            new EspritBundle\EspritBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

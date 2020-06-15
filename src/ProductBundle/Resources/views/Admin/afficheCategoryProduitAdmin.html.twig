@@ -1,0 +1,55 @@
+
+{% extends 'basea.html.twig' %}
+
+            {% block content %}
+
+
+
+                <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fa fa-list" aria-hidden="true"></i>  Types Produits
+                        </h3>
+                        <br>
+                        <br>
+                        <br>
+                    <!-- /.card-header -->
+                    <div class="card-body table-responsive p-0">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+
+
+
+                                <th>Libelle Type</th>
+
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for i in categorys %}
+                                <tr>
+
+                                    <td>{{ i.libelleTp}}</td>
+
+
+                                    <td><a href="{{ path('Categprod_delete',{'idTp':i.idTp}) }}">
+                                            <button type="button" class="btn btn-danger" >
+                                                <i class="fa fa-trash" aria-hidden="true"></i>   Supprimer
+                                            </button></a></td>
+
+
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+
+
+
+
+            {% endblock %}

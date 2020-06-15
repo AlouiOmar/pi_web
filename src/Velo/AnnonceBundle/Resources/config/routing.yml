@@ -61,8 +61,58 @@ velo_admin_delete_annonce:
 velo_admin_signaled_annonce:
     path:     /admin/annonce/signaledlist/
     defaults: { _controller: VeloAnnonceBundle:AdminAnnonce:listAnnonceSignalee }
-
+velo_admin_stat_annonce:
+    path:     /admin/stat
+    defaults: { _controller: VeloAnnonceBundle:AdminAnnonce:statAnnonce }
 
 velo_admin_profile_user:
     path:     /admin/user/{id}
     defaults: { _controller: VeloAnnonceBundle:AdminAnnonce:profile }
+#velo_list_mobile_annonce:
+#    path:     /annonce/listm
+#    defaults: { _controller: VeloAnnonceBundle:AnnonceMobile:afficherAnnonces }
+#velo_ma_list_mobile_annonce:
+#    path:     /annonce/mesannoncem/
+#    defaults: { _controller: VeloAnnonceBundle:AnnonceMobile:afficherMesAnnonces }
+#velo_recherche_list_mobile_annonce:
+#    path:     /annonce/recherche/
+#    defaults: { _controller: VeloAnnonceBundle:AnnonceMobile:rechercheAnnonces }
+#velo_ajouter_mobile_annonce:
+#    path:     /annonce/ajoutm/
+#    defaults: { _controller: VeloAnnonceBundle:AnnonceMobile:ajouterAnnonces }
+#velo_supprimer_mobile_annonce:
+#    path:     /annonce/supprimerm/
+#    defaults: { _controller: VeloAnnonceBundle:AnnonceMobile:supprimerAnnonce }
+#velo_modifier_mobile_annonce:
+#    path:     /annonce/modifierm/
+#    defaults: { _controller: VeloAnnonceBundle:AnnonceMobile:modifierAnnonce }
+#velo_stat_gouv_mobile_annonce:
+#    path:     /annonce/statgm
+#    defaults: { _controller: VeloAnnonceBundle:AnnonceMobile:statGouvAnnonces }
+#velo_mobile_signal_annonce:
+#    path:     /annonce/reportm/
+#    defaults: { _controller: VeloAnnonceBundle:AnnonceMobile:signalm }
+#velo_stat_sign_cat_mobile_annonce:
+#    path:     /annonce/statsc
+#    defaults: { _controller: VeloAnnonceBundle:AnnonceMobile:statSignalCatAnnonces }
+#velo_stat_sign_cau_mobile_annonce:
+#    path:     /annonce/statscau
+#    defaults: { _controller: VeloAnnonceBundle:AnnonceMobile:statSignalCauseAnnonces }
+#velo_stat_type_mobile_annonce:
+#    path:     /annonce/statty
+#    defaults: { _controller: VeloAnnonceBundle:AnnonceMobile:statTypeAnnonces }
+#velo_list_signal_mobile_annonce:
+#    path:     /annonce/listsignm
+#    defaults: { _controller: VeloAnnonceBundle:AnnonceMobile:afficherAnnoncesSign }
+#velo_list_cat_mobile_annonce:
+#    path:     /annonce/listcat/
+#    defaults: { _controller: VeloAnnonceBundle:AnnonceMobile:afficherAnnoncesCat }
+#velo_list_prix_mobile_annonce:
+#    path:     /annonce/listprix/
+#    defaults: { _controller: VeloAnnonceBundle:AnnonceMobile:afficherAnnoncesPrix }
+#velo_list_date_mobile_annonce:
+#    path:     /annonce/listdate
+#    defaults: { _controller: VeloAnnonceBundle:AnnonceMobile:afficherAnnoncesDate }
+#velo_cause_mobile_annonce:
+#    path:     /annonce/cause/
+#    defaults: { _controller: VeloAnnonceBundle:AnnonceMobile:causesAnnonce }
