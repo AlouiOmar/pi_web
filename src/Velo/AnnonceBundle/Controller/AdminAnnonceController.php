@@ -10,6 +10,7 @@ use AppBundle\Form\EditAnnonceType;
 use AppBundle\Form\ProfileType;
 use AppBundle\Form\ProfileTypeextends;
 use AppBundle\Form\RegistrationType;
+use CMEN\GoogleChartsBundle\GoogleCharts\Charts\PieChart;
 use FOS\UserBundle\Form\Type\ProfileFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -161,7 +162,7 @@ class AdminAnnonceController extends Controller
 
             $annonce= new  Annonce();
             $form=$this->createForm(AnnonceType::class,$annonce);
-            $form->add('idu')
+            $form->add('idu',null, array('constraints' => [new NotBlank(),]))
                 ->add('Valider',SubmitType::class,
                     ['attr'=>['formnovalidate'=>'formnovalidate','class'=>'form-control btn btn-primary','id'=>'a']]);;
             $form->handleRequest($request);
@@ -267,5 +268,110 @@ class AdminAnnonceController extends Controller
 //        die();
         return $this->render('@VeloAnnonce/admin/listAnnonceSignalee.html.twig',array('annonces'=>$annonces));
     }
+
+    public function statAnnonceAction()
+    {
+
+        $ag=[
+            ['Gouvernorat','Nombre']
+        ];
+        $annonce = $this->getDoctrine()->getRepository(Annonce::class)->findCountGouvernorat();
+        for ( $i=0;$i<sizeof($annonce);$i++){
+
+            array_push($ag,[$annonce[$i]['gouvernorat'],intval($annonce[$i]['nombre'])]);
+//            dump($ag);
+        }
+        $pieChart1 = new PieChart();
+
+
+        $pieChart1->getData()->setArrayToDataTable($ag);
+        $pieChart1->getOptions()->setTitle('Nombre des annonces publiées par Gouvernorat');
+        $pieChart1->getOptions()->setHeight(500);
+        $pieChart1->getOptions()->setWidth('100%');
+        $pieChart1->getOptions()->setIs3D(true);
+        $pieChart1->getOptions()->getBackgroundColor('#ecf0f5');
+        $pieChart1->getOptions()->getTitleTextStyle()->setBold(true);
+        $pieChart1->getOptions()->getTitleTextStyle()->setColor('#3c8dbc');
+        $pieChart1->getOptions()->getTitleTextStyle()->setItalic(false);
+        $pieChart1->getOptions()->getTitleTextStyle()->setFontName('Arial');
+        $pieChart1->getOptions()->getTitleTextStyle()->setFontSize(20);
+
+        $at=[
+            ['Type','Nombre']
+        ];
+        $annonce = $this->getDoctrine()->getRepository(Annonce::class)->findCountType();
+        for ( $i=0;$i<sizeof($annonce);$i++){
+
+            array_push($at,[$annonce[$i]['type'],intval($annonce[$i]['nombre'])]);
+//            dump($at);
+        }
+        $pieChart2 = new PieChart();
+
+
+        $pieChart2->getData()->setArrayToDataTable($at);
+        $pieChart2->getOptions()->setTitle('Nombre des annonces publiées par Type');
+        $pieChart2->getOptions()->setHeight(500);
+        $pieChart2->getOptions()->setWidth('100%');
+        $pieChart2->getOptions()->setIs3D(true);
+        $pieChart2->getOptions()->getBackgroundColor('#ecf0f5');
+        $pieChart2->getOptions()->getTitleTextStyle()->setBold(true);
+        $pieChart2->getOptions()->getTitleTextStyle()->setColor('#3c8dbc');
+        $pieChart2->getOptions()->getTitleTextStyle()->setItalic(false);
+        $pieChart2->getOptions()->getTitleTextStyle()->setFontName('Arial');
+        $pieChart2->getOptions()->getTitleTextStyle()->setFontSize(20);
+
+
+        $asc=[
+            ['Cause','Nombre']
+        ];
+        $annonce = $this->getDoctrine()->getRepository(Signaler::class)->findCountSignaledCause();
+        for ( $i=0;$i<sizeof($annonce);$i++){
+
+            array_push($asc,[$annonce[$i]['cause'],intval($annonce[$i]['nombre'])]);
+//            dump($at);
+        }
+        $pieChart3 = new PieChart();
+
+
+        $pieChart3->getData()->setArrayToDataTable($asc);
+        $pieChart3->getOptions()->setTitle('Nombre des annonces signalées par Cause');
+        $pieChart3->getOptions()->setHeight(500);
+        $pieChart3->getOptions()->setWidth('100%');
+        $pieChart3->getOptions()->setIs3D(true);
+        $pieChart3->getOptions()->getBackgroundColor('#ecf0f5');
+        $pieChart3->getOptions()->getTitleTextStyle()->setBold(true);
+        $pieChart3->getOptions()->getTitleTextStyle()->setColor('#3c8dbc');
+        $pieChart3->getOptions()->getTitleTextStyle()->setItalic(false);
+        $pieChart3->getOptions()->getTitleTextStyle()->setFontName('Arial');
+        $pieChart3->getOptions()->getTitleTextStyle()->setFontSize(20);
+
+
+        $ascat=[
+            ['Catégorie','Nombre']
+        ];
+        $annonce = $this->getDoctrine()->getRepository(Signaler::class)->findCountSignaledCategorie();
+        for ( $i=0;$i<sizeof($annonce);$i++){
+
+            array_push($ascat,[$annonce[$i]['categorie'],intval($annonce[$i]['nombre'])]);
+//            dump($at);
+        }
+        $pieChart4 = new PieChart();
+
+
+        $pieChart4->getData()->setArrayToDataTable($ascat);
+        $pieChart4->getOptions()->setTitle('Nombre des annonces signalées par Catégorie');
+        $pieChart4->getOptions()->setHeight(500);
+        $pieChart4->getOptions()->setWidth('100%');
+        $pieChart4->getOptions()->setIs3D(true);
+        $pieChart4->getOptions()->getBackgroundColor('#ecf0f5');
+        $pieChart4->getOptions()->getTitleTextStyle()->setBold(true);
+        $pieChart4->getOptions()->getTitleTextStyle()->setColor('#3c8dbc');
+        $pieChart4->getOptions()->getTitleTextStyle()->setItalic(false);
+        $pieChart4->getOptions()->getTitleTextStyle()->setFontName('Arial');
+        $pieChart4->getOptions()->getTitleTextStyle()->setFontSize(20);
+
+        return $this->render('@VeloAnnonce/admin/statAnnonce.html.twig', array('piechart1' => $pieChart1,'piechart2' => $pieChart2,'piechart3' => $pieChart3,'piechart4' => $pieChart4));
+    }
+
 
 }

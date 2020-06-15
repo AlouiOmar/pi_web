@@ -81,7 +81,10 @@ class ChangePasswordController extends BaseController
             $this->userManager->updateUser($user);
 
             if (null === $response = $event->getResponse()) {
-                $url = $this->generateUrl(  'fos_user_profile_show');
+                if ($usr->getRoles()[0]=='ROLE_ADMIN') {
+                    $url = $this->generateUrl(  'velo_admin_profile_user', array('id' => $usr->getId()));
+                }else{
+                $url = $this->generateUrl(  'fos_user_profile_show');}
                 $response = new RedirectResponse($url);
             }
 

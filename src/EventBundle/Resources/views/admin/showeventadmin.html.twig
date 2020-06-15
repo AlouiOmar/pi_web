@@ -1,0 +1,410 @@
+
+{% extends '@Event/admin/indexdashboard.html.twig' %}
+
+
+{% block content %}
+
+
+
+    <body class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
+
+
+
+
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+
+
+            <!-- Main content -->
+            <section class="content">
+                <div class="row">
+
+
+
+
+                    <!-- /.row -->
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="box">
+                                <div class="box-header">
+                                    <h3 class="box-title">la liste des post</h3>
+
+                                    <div class="box-tools">
+                                        <div class="input-group input-group-sm" style="width: 150px;">
+                                            <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+
+                                            <div class="input-group-btn">
+                                                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.box-header -->
+                                <div class="box-body table-responsive no-padding">
+
+                                    <form method="post" action="{{ path('ajax_search_dash')}}">
+                                        <div class="form-group">
+                                            <div class="input-group mb-3">
+
+
+                                                <input type="text"  name="titre" class="form-control" placeholder=' CHERCHER SELON TITRE'
+                                                       onfocus="this.placeholder = ''"
+                                                       onblur="this.placeholder = 'Search Keyword'">
+                                                    <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                                                    </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">titre</th>
+                                            <th scope="col">date</th>
+                                            <th scope="col">region</th>
+                                            <th scope="col">nombre de places</th>
+                                            <th scope="col">circuit</th>
+
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for event in event %}
+                                            <tr>
+                                                <td>
+                                                    <div class="media">
+
+                                                            <p>{{ event.titre }}</p>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <h5>{{ event.dateE|date  }}</h5>
+                                                </td>
+                                                <td>
+                                                    <h5>{{ event.region }}</h5>
+                                                </td>
+                                                <td>
+                                                    <h5>{{ event.nbplaces }}</h5>
+                                                </td>
+                                                <td>
+                                                    <h5>{{ event.nameC }}</h5>
+                                                </td>
+
+                                                <td>
+
+
+                                                    {% if app.user %}
+                                                        {% set existe = false %}
+                                                        {% for event in event.participant %}
+                                                            {% if event.id == app.user.id %}
+                                                                {% set existe =true %}
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    {% endif %}
+                                                    {#
+                                                    {% if app.user   %}
+
+                                                        {% if existe ==false %}
+                                                            <a class="btn btn-info" class="btn_1" href="{{ path('participer_dash',{'id': event.id}) }}">Participer</a>
+                                                        {% elseif event.nbplaces == 0 %}
+                                                            {{ "plus de place" }}
+                                                        {% else %}
+                                                            <a class="btn btn-info" class="btn_1" href="{{ path('annuler_dash',{'id': event.id}) }}"> annuler Participation</a>
+                                                        {% endif %}
+                                                    {% endif %}
+                                                    #}
+
+                                                    {#
+                                                          {% if event.nbplaces != 0 %}
+                                                          <a class="btn btn-info" class="btn_1" href="{{ path('event_participer',{'id': event.id}) }}">Participer</a>
+                                                          {% elseif event.nbplaces == 0 %}#}
+                                                    {#  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                         <div class="modal-dialog" role="document">
+                                                             <div class="modal-content">
+                                                                 <div class="modal-header">
+                                                                     <h5 class="modal-title" id="exampleModalLabel"><br> <br> <br> Alert confirmation  <br></h5>
+                                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                         <span aria-hidden="true">&times;</span>
+                                                                     </button>
+                                                                 </div>
+                                                             </div>
+                                                             <div class="modal-body">
+                                                                 <br>  Il n'y a plus de places dans cet evenement!
+                                                                 <br>
+                                                             </div>
+                                                         </div>
+                                                     </div> #}
+                                                    {#   {% endif %} #}
+                                                </td>
+
+
+                                                <td>
+                                                    <a class="btn btn-info" class="btn_1" href="{{ path('participants_dash',{'id': event.id}) }}">Details</a>
+                                                </td>
+                                                <td>
+
+
+                                                <td>
+                                                    <a   class="btn btn-warning" class="btn_1" href="{{ path('edit_dash',{'id': event.id}) }}">modifier </a>
+                                                </td>
+                                                <!-- Button trigger modal -->
+                                                <td>
+                                                    <a   class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+                                                        delete</a>
+                                                </td>
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel"><br> <br> <br> Alert confirmation  <br></h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <br>  etes-vous sur de vouloir supprimer cet evenement?
+                                                                <br>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                <a    href="{{ path('delete_dash',{'id': event.id}) }}" >  <button type="button"  class="btn btn-primary">supprimer</button></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                </td>
+
+
+                                            </tr>
+                                        {% endfor %}
+
+                                        <tr class="bottom_button">
+                                            <td></td>
+                                            <td>
+                                            <td></td>
+                                            <td></td>
+                                            </td>
+                                            <td></td>
+
+                                            <td></td>
+                                            <td></td>
+
+                                        </tr>
+
+
+                                        </tbody>
+                                    </table>
+                                    <div class="checkout_btn_inner float-right">
+                                        <a class="btn_1 " href="{{ path('vosevent_dash') }}">Vos événements</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+
+
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Create the tabs -->
+            <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+                <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
+                <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <!-- Home tab content -->
+                <div class="tab-pane" id="control-sidebar-home-tab">
+                    <h3 class="control-sidebar-heading">Recent Activity</h3>
+                    <ul class="control-sidebar-menu">
+                        <li>
+                            <a href="javascript:void(0)">
+                                <i class="menu-icon fa fa-birthday-cake bg-red"></i>
+
+                                <div class="menu-info">
+                                    <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
+
+                                    <p>Will be 23 on April 24th</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)">
+                                <i class="menu-icon fa fa-user bg-yellow"></i>
+
+                                <div class="menu-info">
+                                    <h4 class="control-sidebar-subheading">Frodo Updated His Profile</h4>
+
+                                    <p>New phone +1(800)555-1234</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)">
+                                <i class="menu-icon fa fa-envelope-o bg-light-blue"></i>
+
+                                <div class="menu-info">
+                                    <h4 class="control-sidebar-subheading">Nora Joined Mailing List</h4>
+
+                                    <p>nora@example.com</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)">
+                                <i class="menu-icon fa fa-file-code-o bg-green"></i>
+
+                                <div class="menu-info">
+                                    <h4 class="control-sidebar-subheading">Cron Job 254 Executed</h4>
+
+                                    <p>Execution time 5 seconds</p>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- /.control-sidebar-menu -->
+
+                    <h3 class="control-sidebar-heading">Tasks Progress</h3>
+                    <ul class="control-sidebar-menu">
+                        <li>
+                            <a href="javascript:void(0)">
+                                <h4 class="control-sidebar-subheading">
+                                    Custom Template Design
+                                    <span class="label label-danger pull-right">70%</span>
+                                </h4>
+
+                                <div class="progress progress-xxs">
+                                    <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)">
+                                <h4 class="control-sidebar-subheading">
+                                    Update Resume
+                                    <span class="label label-success pull-right">95%</span>
+                                </h4>
+
+                                <div class="progress progress-xxs">
+                                    <div class="progress-bar progress-bar-success" style="width: 95%"></div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)">
+                                <h4 class="control-sidebar-subheading">
+                                    Laravel Integration
+                                    <span class="label label-warning pull-right">50%</span>
+                                </h4>
+
+                                <div class="progress progress-xxs">
+                                    <div class="progress-bar progress-bar-warning" style="width: 50%"></div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)">
+                                <h4 class="control-sidebar-subheading">
+                                    Back End Framework
+                                    <span class="label label-primary pull-right">68%</span>
+                                </h4>
+
+                                <div class="progress progress-xxs">
+                                    <div class="progress-bar progress-bar-primary" style="width: 68%"></div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- /.control-sidebar-menu -->
+
+                </div>
+                <!-- /.tab-pane -->
+                <!-- Stats tab content -->
+                <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
+                <!-- /.tab-pane -->
+                <!-- Settings tab content -->
+                <div class="tab-pane" id="control-sidebar-settings-tab">
+                    <form method="post">
+                        <h3 class="control-sidebar-heading">General Settings</h3>
+
+                        <div class="form-group">
+                            <label class="control-sidebar-subheading">
+                                Report panel usage
+                                <input type="checkbox" class="pull-right" checked>
+                            </label>
+
+                            <p>
+                                Some information about this general settings option
+                            </p>
+                        </div>
+                        <!-- /.form-group -->
+
+                        <div class="form-group">
+                            <label class="control-sidebar-subheading">
+                                Allow mail redirect
+                                <input type="checkbox" class="pull-right" checked>
+                            </label>
+
+                            <p>
+                                Other sets of options are available
+                            </p>
+                        </div>
+                        <!-- /.form-group -->
+
+                        <div class="form-group">
+                            <label class="control-sidebar-subheading">
+                                Expose author name in posts
+                                <input type="checkbox" class="pull-right" checked>
+                            </label>
+
+                            <p>
+                                Allow the user to show his name in blog posts
+                            </p>
+                        </div>
+                        <!-- /.form-group -->
+
+                        <h3 class="control-sidebar-heading">Chat Settings</h3>
+
+                        <div class="form-group">
+                            <label class="control-sidebar-subheading">
+                                Show me as online
+                                <input type="checkbox" class="pull-right" checked>
+                            </label>
+                        </div>
+                        <!-- /.form-group -->
+
+                        <div class="form-group">
+                            <label class="control-sidebar-subheading">
+                                Turn off notifications
+                                <input type="checkbox" class="pull-right">
+                            </label>
+                        </div>
+                        <!-- /.form-group -->
+
+                        <div class="form-group">
+                            <label class="control-sidebar-subheading">
+                                Delete chat history
+                                <a href="javascript:void(0)" class="text-red pull-right"><i class="fa fa-trash-o"></i></a>
+                            </label>
+                        </div>
+                        <!-- /.form-group -->
+                    </form>
+                </div>
+                <!-- /.tab-pane -->
+            </div>
+        </aside>
+        <!-- /.control-sidebar -->
+        <!-- Add the sidebar's background. This div must be placed
+             immediately after the control sidebar -->
+        <div class="control-sidebar-bg"></div>
+    </div>
+    </body>
+    <!-- ./wrapper -->
+{% endblock %}
+

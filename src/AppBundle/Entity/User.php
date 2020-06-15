@@ -6,8 +6,8 @@ namespace AppBundle\Entity;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-
-
+use BlogBundle\Entity\Commentaire;
+use EventBundle\Entity\Event;
 /**
  * @ORM\Entity
  * @ORM\Table(name="user")
@@ -145,6 +145,70 @@ class User extends BaseUser
     }
 
     /**
+     * Many series have Many comm.
+     * @ORM\ManyToMany(targetEntity="BlogBundle\Entity\Commentaire", inversedBy="likes")
+     * * @ORM\JoinTable(name="likes",
+     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="comm_id", referencedColumnName="id")}
+     *      )
+     */
+    private $commLikes;
+
+
+    /**
+     * @param Commentaire $commentaire
+     * @return $this
+     */
+    public function addComm(\BlogBundle\Entity\Commentaire $comm)
+    {
+        if (!$this->commLikes->contains($comm)) {
+            $this->commLikes[] = $comm;
+        }
+        return $this;
+    }
+
+
+    /**
+     * @param Commentaire $commentaire
+     * @return $this
+     */
+    public function removeComm(\BlogBundle\Entity\Commentaire $comm)
+    {
+        if ($this->commLikes->contains($comm)) {
+            $this->commLikes->removeElement($comm);
+        }
+        return $this;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+    /**
+     * @return mixed
+     */
+    public function getCommLikes()
+    {
+        return $this->commLikes;
+    }
+
+    /**
+     * @param mixed $commLikes
+     */
+    public function setCommLikes($commLikes)
+    {
+        $this->commLikes = $commLikes;
+    }
+
+
+    /**
      * @return string
      */
     public function getNom()
@@ -264,6 +328,62 @@ class User extends BaseUser
         $this->photo = $photo;
     }
 
+    /**
+     * Many series have Many comm.
+     * @ORM\ManyToMany(targetEntity="EventBundle\Entity\Event", inversedBy="participant")
+     * * @ORM\JoinTable(name="participer",
+     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="event_id", referencedColumnName="id")}
+     *      )
+     */
+    private $eventparticiper;
 
+
+
+
+    /**
+     * @param Event $eventsss
+     * @return $this
+     */
+    public function addeventuser(\EventBundle\Entity\Event $eventss)
+    {
+        if (!$this->eventparticiper->contains($eventss)) {
+            $this->eventparticiper[] = $eventss;
+        }
+        return $this;
+    }
+
+
+
+
+    /**
+     * @param Event $eventssss
+     * @return $this
+     */
+    public function removeParticipation(\EventBundle\Entity\Event $eventsssss)
+    {
+        if ($this->eventparticiper->contains($eventsssss)) {
+            $this->eventparticiper->removeElement($eventsssss);
+        }
+        return $this;
+    }
+
+
+
+    /**
+     * @return mixed
+     */
+    public function getEventparticiper()
+    {
+        return $this->eventparticiper;
+    }
+
+    /**
+     * @param mixed $eventparticiper
+     */
+    public function setEventparticiper($eventparticiper)
+    {
+        $this->eventparticiper = $eventparticiper;
+    }
 
 }

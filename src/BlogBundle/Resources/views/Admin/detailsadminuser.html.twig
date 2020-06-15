@@ -1,0 +1,171 @@
+{% extends '@Blog/Admin/dashbord.html.twig' %}
+
+
+
+
+
+{% block footer %}
+
+{% endblock %}
+
+
+
+
+
+
+
+
+{% block content %}
+<body class="bg-white">
+
+
+
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+
+
+
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+
+
+               <div class="row">
+               
+
+<!-- breadcrumb start-->
+{% for message in app.flashes('info') %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+{% endfor %}
+<!--================Blog Area =================-->
+
+
+<section class="content-header">
+      <h1>
+        User Profile
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">Examples</a></li>
+        <li class="active">User profile</li>
+      </ol>
+    </section>
+
+
+    <section class="content">
+
+      <div class="row">
+        <div class="col-md-3">
+
+          <!-- Profile Image -->
+          <div class="box box-primary">
+            <div class="box-body box-profile">
+              <img class="profile-user-img img-responsive img-circle" <img  style="width: 100; height: 100px;" src="{{ asset('uplods/post/' ~ photo) }}" alt="User profile picture">
+
+              <h3 class="profile-username text-center">{{username}}</h3>
+
+              <p class="text-muted text-center">{{email}}</p>
+
+            
+
+            
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+
+          <!-- About Me Box -->
+        
+          
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-9">
+          <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+    
+              <li><a href="#settings" data-toggle="tab">Settings</a></li>
+            </ul>
+            <div class="tab-content">
+              <div class="active tab-pane" id="activity">
+                <!-- Post -->
+                
+                <!-- /.post -->
+
+               
+
+              <div class="tab-pane" id="settings">
+                <form class="form-horizontal">
+                  <div class="form-group">
+                    <label for="inputName" class="col-sm-2 control-label">Username</label>
+
+                    <div class="col-sm-10">
+                      <input type="email" class="form-control" id="inputName" value="{{username }}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputEmail" class="col-sm-2 control-label">Firstname</label>
+
+                    <div class="col-sm-10">
+                      <input type="email" class="form-control" id="inputEmail" value="{{firstname }}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputName" class="col-sm-2 control-label">Email</label>
+
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="inputName"  value="{{email }}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputExperience" class="col-sm-2 control-label">Telephone</label>
+
+                    <div class="col-sm-10">
+                    <input type="text" class="form-control" id="inputName"  value="{{telephone }}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputSkills" class="col-sm-2 control-label">Age</label>
+
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="inputSkills" value="{{age}}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                      <div class="checkbox">
+                     
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    
+                  </div>
+                </form>
+              </div>
+              <!-- /.tab-pane -->
+            </div>
+            <!-- /.tab-content -->
+          </div>
+          <!-- /.nav-tabs-custom -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+
+    </section>
+
+
+<!--================Blog Area end =================-->
+</body>
+
+{% endblock %}

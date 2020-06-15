@@ -1,3 +1,5 @@
+
+
 fos_user_edit_profile_override:
     path: /profile/edit
     defaults: { _controller: AppBundle:Profile:edit}
@@ -6,7 +8,13 @@ fos_user_change_password_override:
     defaults: { _controller: AppBundle:ChangePassword:changePassword}
 fos_user_security_register_override:
     path: /register
-    defaults: { _controller: AppBundle:Registration:register }
+    defaults: { _controller: AppBundle:Registration:registerUser }
+#fos_user_security_mobile_login_override:
+#    path: /loginm/
+#    defaults: { _controller: AppBundle:Registration:loginm }
+#fos_user_security_mobile_register_override:
+#    path: /registerm/
+#    defaults: { _controller: AppBundle:Registration:registerm }
 
 velo_admin_list_user:
     path:     /admin/list
@@ -20,10 +28,29 @@ velo_admin_edit_user:
 velo_admin_add_user:
     path:     /admin/add
     defaults: { _controller: AppBundle:Registration:add }
+gregwar_captcha_routing:
+    resource: "@GregwarCaptchaBundle/Resources/config/routing/routing.yml"
+
+esprit:
+    resource: "@EspritBundle/Resources/config/routing.yml"
+    prefix:   /
 
 velo_annonce:
     resource: "@VeloAnnonceBundle/Resources/config/routing.yml"
     prefix:   /
+blog:
+    resource: "@BlogBundle/Resources/config/routing.yml"
+    prefix:   /
+
+product:
+    resource: "@ProductBundle/Resources/config/routing.yml"
+    prefix:   /
+event:
+    resource: "@EventBundle/Resources/config/routing.yml"
+    prefix:   /
+pianosolo_weather:
+    resource: "@PianoSoloWeatherBundle/Resources/config/routing.yml"
+
 
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"

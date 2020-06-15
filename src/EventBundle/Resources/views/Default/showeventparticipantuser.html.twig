@@ -1,0 +1,104 @@
+
+{% extends '@Event/Default/index.html.twig' %}
+
+{% block banner %}
+
+
+{% endblock %}
+
+{% block content %}
+
+
+
+
+
+
+<body class="bg-white">
+
+<!--================Home Banner Area =================-->
+<!-- breadcrumb start-->
+<section class="breadcrumb breadcrumb_bg">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="breadcrumb_iner">
+                    <div class="breadcrumb_iner_item">
+                        <a class="btn btn-info" class="btn_1" href="{{  path('event_show')}}"><- Retour aux événements</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- breadcrumb start-->
+
+
+
+<!--================Cart Area =================-->
+<section class="cart_area section_padding">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="breadcrumb_iner">
+                    <div class="breadcrumb_iner_item">
+                        <p>{{ pianosolo_get_weather(events.region) }}</p>
+                        <p>{{'Détails de levénement: ' }}{{events.titre}}</p>
+                        <p>{{ 'Circuit:         ' }}<a href="#" class="login ak-modal-trigger">
+                                <span>{{events.nameC}}</span>
+                            </a></p>
+                        <p></p>
+                        <p>{{ 'Description: ' }}{{ events.description }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="cart_area section_padding">
+    <div class="container">
+        <div class="cart_inner">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Participants</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for par in events.participant %}
+                    <tr>
+                        <td>
+                            <div class="media">
+
+                                <div class="media-body">
+                                    <p> {{ par.getUsername() }}</p>
+
+                                </div>
+                                <a class="btn btn-info" class="btn_1" href="#">voir profil</a>
+
+                            </div>
+                        </td>
+                    </tr>
+
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+                <div class="checkout_btn_inner float-right">
+                    <a class="btn_1" href="#">Créer un événement</a>
+                    <a class="btn_1 checkout_btn_1" href="#">Vos événements</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================End Cart Area =================--
+
+
+
+
+
+
+</body>
+
+{% endblock %}

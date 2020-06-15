@@ -1,0 +1,25 @@
+{% extends 'basea.html.twig' %}
+
+{% block content %}
+
+
+
+    {{ form_start(f)}}
+
+    <div class="container">
+        <h1>Ajouter un nouveau type de produit</h1>
+        <br>
+    <div class="form-group">
+        {{ form_label(f.libelleTp, 'Nouveau Type')}}
+        {{ form_widget(f.libelleTp,{'attr':{'class':'form-control'}})}}
+        {{ form_errors(f.libelleTp)}}
+        <br>
+
+        <div class="col-md-12 form-group p_star"> {{ form_row(f.Save)}}</div>
+
+    </div>
+    </div>
+
+    {{ form_end(f)}}
+
+{% endblock %}

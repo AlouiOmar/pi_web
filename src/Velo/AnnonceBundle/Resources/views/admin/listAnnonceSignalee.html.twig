@@ -18,12 +18,12 @@
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="{{ asset('dist/css/skins/_all-skins.min.css') }}">
 {% endblock %}
+{% block annonce %}class="active treeview menu-open"{% endblock annonce %}
+{% block listeannoncesignalee %}class="active"{% endblock listeannoncesignalee %}
 {% block body %}
-{% block annonce %}  <li class="active treeview menu-open"> {% endblock annonce %}
-{% block listeannoncesignalee %}<li class="active"><a href="{{ path('velo_admin_signaled_annonce') }}"><i class="fa fa-warning"></i> Les annonces signalées</a></li>{% endblock listeannoncesignalee %}
     <br>
-    <div class="col-md-12">
-     <div class="demo-container">
+    <div class="container">
+     <div class="demo-container" style="width: 144%;margin-left: -22%;">
         <div id="gridContainer"></div>
 
     </div>
