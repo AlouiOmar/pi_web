@@ -127,5 +127,22 @@ class AnnonceRepository extends EntityRepository
             ->getResult();
     }
 
+    public function findCountGouvernorat()
+    {
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT COUNT(a.ida) as nombre, a.gouvernorat FROM AppBundle:Annonce as a GROUP BY a.gouvernorat'
+            )
+            ->getResult();
+    }
+
+    public function findCountType()
+    {
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT COUNT(a.ida) as nombre, a.type FROM AppBundle:Annonce as a GROUP BY a.type'
+            )
+            ->getResult();
+    }
 
 }

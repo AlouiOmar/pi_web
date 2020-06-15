@@ -1,6 +1,6 @@
 {% trans_default_domain 'FOSUserBundle' %}
 <div class="p-5 col-lg-5" style="float:none;margin:auto;">
-{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register', 'novalidate' : 'novalidate'}}) }}
+{{ form_start(form, {'method': 'post', 'action': path('fos_user_security_register_override'), 'attr': {'class': 'fos_user_registration_register', 'novalidate' : 'novalidate'}}) }}
     {{ form_widget(form) }}
 
     <div>

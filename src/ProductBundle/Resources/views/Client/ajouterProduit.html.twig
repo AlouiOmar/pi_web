@@ -1,0 +1,82 @@
+{% extends 'base2.html.twig' %}
+
+{% block content %}
+
+
+
+    <div class="container">
+        {{ form_start(form)}}
+        <br>
+        <br>
+        <br>
+        <h1>Ajouter un Produit</h1>
+
+
+        <div class="form-group">
+            {{ form_label(form.nomP, 'Nom')}}
+            {{ form_widget(form.nomP,{'attr':{'class':'form-control'}})}}
+            {{ form_errors(form.nomP)}}
+
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.typeP, 'Type' )}} <br>
+            {{ form_widget(form.typeP,{'attr':{'class':'form-control'}})}}
+            {{ form_errors(form.typeP)}}
+
+        </div>
+        <br>
+        <br>
+        <div class="form-group">
+            {{ form_label(form.marqueP, 'Marque' )}}
+            {{ form_widget(form.marqueP,{'attr':{'class':'form-control'}})}}
+            {{ form_errors(form.marqueP)}}
+
+        </div>
+        <div class="form-group">
+            {{ form_label(form.categorieP, 'Categorie' )}}
+            {{ form_widget(form.categorieP,{'attr':{'class':'form-control'}})}}
+            {{ form_errors(form.categorieP)}}
+
+        </div>
+        <div class="form-group">
+            {{ form_label(form.couleurP, 'Couleur' )}}
+            {{ form_widget(form.couleurP,{'attr':{'class':'form-control'}})}}
+            {{ form_errors(form.couleurP)}}
+
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.prixP, 'Prix' )}}
+            {{ form_widget(form.prixP,{'attr':{'class':'form-control'}})}}
+            {{ form_errors(form.prixP)}}
+
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.tel, 'Téléphone' )}}
+            {{ form_widget(form.tel,{'attr':{'class':'form-control'}})}}
+            {{ form_errors(form.tel)}}
+
+        </div>
+
+
+        <div class="form-group">
+            {{ form_row(form.imageName,{'attr':{'class':'form-control'}})}}
+
+
+        </div>
+
+        <div class="form-group">
+
+            {{ form_widget(form.captcha) }}
+            <br>
+        </div>
+
+        <br>
+        <div class="col-md-12 form-group p_star"> {{ form_row(form.Save)}}</div>
+        {{ form_end(form)}}
+    </div>
+
+
+{% endblock %}
