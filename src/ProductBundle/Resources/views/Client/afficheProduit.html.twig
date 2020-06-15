@@ -1,0 +1,116 @@
+{% extends 'base2.html.twig' %}
+{% block content %}
+    <br>
+    <br>
+    <div class="product-item-filter row">
+
+        <div class="col-12 col-sm-8 text-center text-sm-left">
+
+
+            <span> <b> <font size="4">Filtrer par : </font> </b></span>
+            <br>
+            <br>
+            <select id="pricehigh" onchange="price()" class="selectpicker">
+
+                <option value="1">Tous les Produits</option>
+                <option value="2">High Price → Low Price</option>
+                <option value="3">Low Price → High Price</option>
+
+
+            </select>
+
+
+        </div>
+
+
+    </div>
+
+    <br>
+
+    <div class="product-categorie-box">
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade show active" id="grid-view">
+                <div class="row">
+
+                    {% for i in produits %}
+                        <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
+                            <div class="products-single fix">
+                                <div class="border border-y rounded p-2">
+                                    <img src="{{ asset('/public/uploads/')~i.photoP }}" class="rounded-lg" alt="Image">
+                                    <div class="box-img-hover">
+                                        <div class="type-lb">
+                                            <p class="new">{{ i.nomP }}</p>
+
+                                        </div>
+
+                                        <div class="why-text">
+                                            <h4>{{ i.prixP }} DT</h4>
+
+
+                                        </div>
+                                    </div>
+                                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                        <div class="mask-icon">
+                                            <ul>
+                                                {% if app.user.id == i.id %}
+                                                    <li><a href="{{ path('showProduitClientSingle',{'idP':i.idP}) }}"
+                                                           data-toggle="tooltip" data-placement="right" title="Compare"><i
+                                                                    class="fas fa-sync-alt"></i></a></li>
+                                                    <li><a href="{{ path('prod_delete_Client',{'idP':i.idP}) }}"
+                                                           data-toggle="tooltip" data-placement="right" title="Compare"> <i class="fas fa-trash"></i></a></li>
+
+                                                {% endif %}
+                                                <li>
+                                                    <a href="{{ path('upProduitClientSingle',{'idP':i.idP},{'nomP':i.nomP},{'photoP':i.photoP}) }}"
+                                                       data-toggle="tooltip" data-placement="right" title="View"><i
+                                                                class="fas fa-eye"></i></a></li>
+                                            </ul>
+                                            {% if app.user.id != i.id %}
+                                                <a class="cart" href="{{ path('cart_add',{'idP':i.idP}) }}"><i
+                                                            class="fas fa-shopping-cart"></i> Ajouter au favoris</a>
+                                            {% endif %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                <br>
+                            </div>
+                        </div>
+                        <br>
+
+                    {% endfor %}
+                </div>
+            </div>
+
+
+        </div>
+        <script>
+            function price() {
+                var selected = document.getElementById('pricehigh').options[document.getElementById('pricehigh').selectedIndex];
+                console.log(selected.value);
+                if (selected.value == 1) {
+                    window.location.replace("{{ path('showProdClient') }}");
+                }
+                if (selected.value == 2) {
+                    window.location.replace("{{ path('showHighPrice') }}");
+                } else if (selected.value == 3) {
+                    window.location.replace("{{ path('showLowPrice') }}");
+                } else {
+                    window.location.replace("{{ path('showProdClient') }}");
+                }
+
+            }
+        </script>
+
+        <div class="pagination pagination-sm m-0 float-right ">
+            {{ knp_pagination_render(produits) }}
+        </div>
+
+
+    </div>
+
+
+
+
+
+
+{% endblock %}

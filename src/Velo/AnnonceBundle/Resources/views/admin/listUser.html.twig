@@ -18,12 +18,12 @@
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="{{ asset('dist/css/skins/_all-skins.min.css') }}">
 {% endblock %}
+{% block user %}class="active treeview menu-open"{% endblock user %}
+{% block listuser %}class="active"{% endblock listuser %}
 {% block body %}
-{% block user %}   <li class="active treeview menu-open">  {% endblock user %}
-{% block listuser %}   <li class="active"><a href="{{ path('velo_admin_list_user') }}"><i class="fa fa-users"></i> Liste des utilisateurs</a></li>{% endblock listuser %}
     <br>
-    <div class="col-md-12">
-     <div class="demo-container">
+    <div class="container">
+     <div class="demo-container" style="width: 144%;margin-left: -22%;">
         <div id="gridContainer"></div>
         <script id="gridPhoto" type="text/html">
             <div class="photo">

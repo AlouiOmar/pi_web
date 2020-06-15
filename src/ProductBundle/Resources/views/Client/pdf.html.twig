@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+
+
+
+</head>
+<body>
+<center><h2 style="color:darkred";><font size="18"> Votre devis </font></h2></center>
+<br>
+<br>
+<br>
+<br>
+<h2><font size="4"><i> <b>Demandeur : </b> {{ app.user.username }} </i></font></h2>
+<br>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Produit</th>
+        <th>Prix</th>
+        <th>Quantité</th>
+        <th>Téléphone publicateur</th>
+        <th>Total</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for item in items %}
+        <tr>
+            <td> {{ item.product.nomP}} </td>
+            <td> {{ item.product.prixP }} </td>
+            <td> {{ item.quantity }} </td>
+            <td> {{ item.product.tel }} </td>
+            <td> {{ item.product.prixP * item.quantity }}</td>
+            <td>
+
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+
+
+</table>
+<br>
+<br>
+<br>
+<p><font size="4" > <b>Total  : </b> {{ total }} DT</font></p>
+
+</body>
+</html>

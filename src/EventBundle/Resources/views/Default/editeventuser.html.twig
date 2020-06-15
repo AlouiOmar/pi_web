@@ -1,0 +1,97 @@
+{% extends '@Event/Default/index.html.twig' %}
+
+{% block banner %}
+
+
+{% endblock %}
+
+{% block content %}
+
+
+
+    <body class="bg-white">
+
+    <!--================Home Banner Area =================-->
+    <!-- breadcrumb start-->
+    <section class="breadcrumb breadcrumb_bg">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-12">
+                    <div class="breadcrumb_iner">
+                        <div class="breadcrumb_iner_item">
+                            <p>Home / event / modifier un evenement </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- breadcrumb start-->
+
+    <!--================Tracking Box Area =================-->
+    <section class="tracking_box_area section_padding">
+        <div class="container">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-lg-12">
+                    <div class="tracking_box_inner">
+
+                        {{ form_start(Form,{'attr':{'class':'row tracking_form','novalidate':'novalidate'}}) }}
+                        <div class="col-md-12 form-group">
+                            {{ form_errors(Form.titre) }}
+                            Titre       {{ form_widget(Form.titre,{'attr':{'type':'text','class':'form-control','placeholder':'saisir un titre'}}) }}
+
+                        </div>
+                        {{ form_errors(Form.dateE)}}
+                        <div class="col-md-12 form-group">
+
+                            Date       {{ form_widget(Form.dateE,{'attr':{'type':'text','class':'form-control','placeholder':'saisir date'}}) }}
+                        </div>
+                        {{ form_errors(Form.description)}}
+                        <div class="col-md-12 form-group">
+                            Description    {{ form_widget(Form.description,{'attr':{'type':'text','class':'form-control','placeholder':'Description'}}) }}
+                        </div>
+                        {{ form_errors(Form.region)}}
+                        <div class="col-md-12 form-group">
+                            Region    {{ form_widget(Form.region,{'attr':{'type':'text','class':'form-control','placeholder':'saisir Region'}}) }}
+                        </div>
+                        {{ form_errors(Form.nameC)}}
+                        <div class="col-md-12 form-group">
+                            Nom circuit    {{ form_widget(Form.nameC,{'attr':{'type':'text','class':'form-control','placeholder':'saisir Circuit'}}) }}
+                        </div>
+
+                        {{ form_errors(Form.nbplaces)}}
+                        <div class="col-md-12 form-group">
+
+                            Nombre de places       {{ form_widget(Form.nbplaces,{'attr':{'type':'number','class':'form-control','placeholder':1}}) }}
+                        </div>
+                        <div class="col-md-12 form-group">
+                            {{ form_widget(Form.Submit,{'attr':{'type':'text','class':'btn_3','placeholder':'ajouter un blog'}}) }}
+                        </div>
+                        {{ form_end(Form) }}
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+    <!--================End Tracking Box Area =================-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+
+{% endblock %}
