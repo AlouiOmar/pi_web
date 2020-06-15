@@ -1,0 +1,72 @@
+
+{% extends '@Event/admin/indexdashboard.html.twig' %}
+
+
+{% block content %}
+
+
+
+    <body class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <!-- Main content -->
+            <section class="content">
+                <div class="row">
+                    <p>{{ pianosolo_get_weather(events.region) }}</p>
+                    <p>{{'Détails de levénement: ' }}{{events.titre}}</p>
+                    <p>{{ 'Circuit:         ' }}<a href="#" class="login ak-modal-trigger">
+                            <span>{{events.nameC}}</span>
+                        </a></p>
+                    <p></p>
+                    <p>{{ 'Description: ' }}{{ events.description }}</p>
+                    <!-- /.row -->
+                </div>
+            </section>
+        </div>
+    </div>
+    <div class="wrapper">
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <!-- Main content -->
+            <section class="content">
+                <div class="row">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Participants</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for par in events.participant %}
+                            <tr>
+                                <td>
+                                    <div class="media">
+
+                                        <div class="media-body">
+                                            <p> {{ par.getUsername() }}</p>
+
+                                        </div>
+                                        <a  class="btn_1" href="#">voir profil</a>
+
+                                    </div>
+                                </td>
+                            </tr>
+
+                        {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </div>
+    </body>
+
+
+
+    <!-- ./wrapper -->
+{% endblock %}
+

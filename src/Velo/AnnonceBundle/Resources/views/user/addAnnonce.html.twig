@@ -4,13 +4,43 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/css/bootstrap-datepicker.css">
 {% endblock %}
 {% block body %}
-    <div class="p-5 col-md-12 bg-white">
+    <div class="p-5 col-md-12 " style="
+    background-color: #fbfbfb;
+">
 <div class="p-5 col-lg-5" style="float:none;margin:auto;">
     {{ form(form, {'attr': {'novalidate': 'novalidate'}}) }}
 
 </div>
     </div>
     <script src="{{ asset('js/a.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script>
+        $( document ).ready(function() {
+            console.log( "document loaded" );
+            var a=$('.b').val();
+            if(a=='Vélo'){
+                console.log('velo selected');
+                $( ".k" ).prop( "disabled", false );
+            }
+            if(a=='Pièce de rechange'){
+                console.log('piece selected');
+                $( ".k" ).prop( "disabled", true );
+                $( ".k" ).val( " " );
+
+
+            }
+            if(a=='Accessoire'){
+                console.log('acc selected');
+                $( ".k" ).prop( "disabled", true );
+
+            }
+        });
+
+        $( window ).on( "load", function() {
+            console.log( "window loaded" );
+
+        });
+    </script>
 
 {% endblock body %}
 {% block customjs %}

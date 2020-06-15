@@ -1,0 +1,54 @@
+{% extends 'base2.html.twig' %}
+{% block content %}
+<div class="product_image_area section_padding">
+    <div class="container">
+        <div class="row s_product_inner">
+            <div class="col-lg-5">
+                <div class="product_slider_img">
+                    <div id="vertical">
+                        <div data-thumb="img/product_details/prodect_details_1.png">
+                            <img src="{{ asset('/public/uploads/')~produits.photoP}}" />
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5 offset-lg-1">
+                <div class="s_product_text">
+                    <h3>Détails du produit >></h3>
+                    <br> <br>
+                    <h2><font size="7">{{ produits.prixP }}  DT</font></h2>
+                    <br>
+                    <ul class="list">
+                        <li>
+                            <a href="#">
+                                <span><b>Nom</b></span> : {{produits.nomP  }}</a>
+                        </li>
+                        <br>
+                        <li>
+                            <a href="#"> <span><b>Marque</b></span> : {{ produits.marqueP }}</a>
+                        </li>
+                        <br>
+                        <li>
+                            <a href="#"> <span><b>Catégorie</b></span> : {{produits.categorieP  }} </a>
+                        </li>
+                        <br>
+                        <li>
+                            <a href="#"> <span><b>Couleur</b></span> : {{produits.couleurP  }} </a>
+                        </li>
+                        <br>
+                        <li>
+                            <a href="#"> <span><b>Téléphone</b></span> : {{produits.tel  }} </a>
+                        </li>
+                    </ul>
+
+                    <div class="card_area">
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

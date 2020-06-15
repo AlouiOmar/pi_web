@@ -1,0 +1,115 @@
+
+{% extends 'basea.html.twig' %}
+
+            {% block content %}
+
+             <script>
+              function myFunction() {
+               var input, filter, table, tr, td, i, txtValue;
+               input = document.getElementById("recherche");
+               filter = input.value.toUpperCase();
+               table = document.getElementById("recherchetable");
+               tr = table.getElementsByTagName("tr");
+               for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[0];
+                if (td) {
+                 txtValue = td.textContent || td.innerText;
+                 if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                  tr[i].style.display = "";
+                 } else {
+                  tr[i].style.display = "none";
+                 }
+                }
+               }
+              }
+             </script>
+
+             <script type="text/javascript" src="{{ asset('vendor/js/socialite.js') }}"></script>
+             <script type="text/javascript" src="{{ asset('vendor/js/socialite.min.js') }}"></script>
+             <!--...-->
+
+
+
+             <script>
+              $(document).ready(function() {
+               Socialite.load();
+              });
+             </script>
+
+
+             <div class="col-12">
+              <div class="card">
+               <div class="card-header">
+                <h3 class="card-title">
+                 <i class="fa fa-list" aria-hidden="true"></i>
+                 Liste de produits
+                </h3>
+                <br>
+                <br>
+
+
+               <!-- /.card-header -->
+               <div class="card-body table-responsive p-0" data-bgColor="red">
+                <table id="recherchetable" class="table table-bordered table-striped" border="2" bgcolor="#8b0000">
+                 <thead>
+                 <tr>
+
+
+                  <th>Nom</th>
+                  <th>Marque</th>
+                  <th>Categorie</th>
+                  <th>Couleur</th>
+                  <th>Prix</th>
+                  <th>Téléphone</th>
+                  <th>Photo</th>
+
+
+                 </tr>
+                 </thead>
+                 <tbody>
+                  {% for i in produits %}
+                   <tr>
+                    <td>{{ i.nomP}}</td>
+                    <td>{{ i.marqueP}}</td>
+                    <td>{{ i.categorieP}}</td>
+                    <td>{{ i.couleurP}}</td>
+                    <td>{{ i.prixP}}</td>
+                    <td>{{ i.tel}}</td>
+                    <td><img src="{{ asset('public/uploads/')~i.photoP}}" alt="message user image" class="direct-chat-img" ></td>
+                    <td><a href="{{ path('prod_update',{'idP':i.idP}) }}">
+                      <button type="button" class="btn btn-primary">
+                       <i class="fa fa-refresh" aria-hidden="true"></i>
+                        Modifier
+                      </button></a></td>
+
+                    <td><a href="{{ path('prod_delete',{'idP':i.idP}) }}">
+                      <button type="button" class="btn btn-danger" >
+                       <i class="fa fa-trash" aria-hidden="true"></i>   Supprimer une ligne
+                      </button></a></td>
+
+
+                    <td>  <a href="{{path('prod_deleteTotal',{'idP':i.idP})}}" class="btn btn-danger btn-sm">
+                      <span class="glyphicon glyphicon-trash" >
+                     </a></td>
+
+                   </tr>
+                  {% endfor %}
+                  </tbody>
+                 <tfoot>
+                 <tr>
+
+
+                 </tr>
+
+                 </tfoot>
+                </table>
+               </div>
+               <!-- /.card-body -->
+
+              </div>
+              <!-- /.card -->
+
+             </div>
+
+
+            {% endblock %}

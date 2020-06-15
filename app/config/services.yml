@@ -2,7 +2,7 @@
 # https://symfony.com/doc/current/service_container.html
 parameters:
     #parameter_name: value
-
+    uploads_directory: '%kernel.project_dir%/web/public/uploads'
 services:
     # default configuration for services in *this* file
     _defaults:
@@ -43,5 +43,8 @@ services:
     AppBundle\Controller\ProfileController:
         arguments:
             $formFactory: '@fos_user.profile.form.factory'
+    EspritBundle\Controller\RegistrationController:
+        arguments:
+            $formFactory: '@fos_user.registration.form.factory'
 #    app.form.profile:
 #        class: AppBundle\Form\ProfileType
