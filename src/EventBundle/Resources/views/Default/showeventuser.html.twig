@@ -1,0 +1,213 @@
+
+{% extends '@Event/Default/index.html.twig' %}
+
+{% block banner %}
+
+
+{% endblock %}
+
+{% block content %}
+
+
+
+
+
+
+<body class="bg-white">
+
+<!--================Home Banner Area =================-->
+<!-- breadcrumb start-->
+<section class="breadcrumb breadcrumb_bg">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="breadcrumb_iner">
+                    <div class="breadcrumb_iner_item">
+                        <p>Home / event / la liste des evements</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- breadcrumb start-->
+
+<!--================Cart Area =================-->
+<section class="cart_area section_padding">
+    <div class="container">
+        <div class="cart_inner">
+            <div class="table-responsive">
+                <form method="post" action="{{ path('ajax_search')}}">
+                    <div class="form-group">
+                        <div class="input-group mb-3">
+
+
+                            <input type="text"  name="titre" class="form-control" placeholder=' CHERCHER SELON TITRE'
+                                   onfocus="this.placeholder = ''"
+                                   onblur="this.placeholder = 'Search Keyword'">
+                            <div class="input-group-append">
+                                <button class="btn" ><i class="ti-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">titre</th>
+                        <th scope="col">date</th>
+                        <th scope="col">region</th>
+                        <th scope="col">nombre de places</th>
+                        <th scope="col">circuit</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for event in event %}
+                    <tr>
+                        <td>
+                            <div class="media">
+
+                                <div class="media-body">
+                                    <p>{{ event.titre }}</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <h5>{{ event.dateE|date  }}</h5>
+                        </td>
+                        <td>
+                        <h5>{{ event.region }}</h5>
+                        </td>
+                        <td>
+                            <h5>{{ event.nbplaces }}</h5>
+                        </td>
+                        <td>
+                            <h5>{{ event.nameC }}</h5>
+                        </td>
+
+                        <td>
+
+
+                            {% if app.user %}
+                                {% set existe = false %}
+                                {% for event in event.participant %}
+                                    {% if event.id == app.user.id %}
+                                        {% set existe =true %}
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+
+                            {% if app.user   %}
+
+                            {% if existe ==false %}
+                                <a class="btn btn-info" class="btn_1" href="{{ path('event_participer',{'id': event.id}) }}">Participer</a>
+                            {% elseif event.nbplaces == 0 %}
+                                {{ "plus de place" }}
+                            {% else %}
+                                <a class="btn btn-info" class="btn_1" href="{{ path('annuler_participer',{'id': event.id}) }}"> annuler Participer</a>
+                            {% endif %}
+                            {% endif %}
+
+
+                            {#
+                                  {% if event.nbplaces != 0 %}
+                                  <a class="btn btn-info" class="btn_1" href="{{ path('event_participer',{'id': event.id}) }}">Participer</a>
+                                  {% elseif event.nbplaces == 0 %}#}
+                            {#  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                 <div class="modal-dialog" role="document">
+                                     <div class="modal-content">
+                                         <div class="modal-header">
+                                             <h5 class="modal-title" id="exampleModalLabel"><br> <br> <br> Alert confirmation  <br></h5>
+                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                 <span aria-hidden="true">&times;</span>
+                                             </button>
+                                         </div>
+                                     </div>
+                                     <div class="modal-body">
+                                         <br>  Il n'y a plus de places dans cet evenement!
+                                         <br>
+                                     </div>
+                                 </div>
+                             </div> #}
+                          {#   {% endif %} #}
+                        </td>
+
+
+                        <td>
+                            <a class="btn btn-info" class="btn_1" href="{{ path('show_participants',{'id': event.id}) }}">Details</a>
+                        </td>
+                        <td>
+                           {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                            {% if(event.creator.id== app.user.id) %}
+
+                        <td>
+                            <a   class="btn btn-warning" class="btn_1" href="{{ path('event_edit',{'id': event.id}) }}">modifier </a>
+                        </td>
+                            <!-- Button trigger modal -->
+                        <td>
+                            <a   class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+                                   delete</a>
+                        </td>
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel"><br> <br> <br> Alert confirmation  <br></h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <br>  etes-vous sur de vouloir supprimer cet evenement?
+                                            <br>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <a    href="{{ path('event_delete',{'id': event.id}) }}" >  <button type="button"  class="btn btn-primary">supprimer</button></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        {% endif %}
+                        {% endif %}
+
+                    </tr>
+                    {% endfor %}
+
+                    <tr class="bottom_button">
+                        <td></td>
+                        <td>
+                        <td></td>
+                        <td></td>
+                        </td>
+                        <td></td>
+
+                        <td></td>
+                        <td></td>
+
+                    </tr>
+
+
+                    </tbody>
+                </table>
+                <div class="checkout_btn_inner float-right">
+                    <a class="btn_1" href="{{ path('event_create') }}">Créer un évenement</a>
+                    <a class="btn_1 " href="{{ path('vosevent_show') }}">Vos événements</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================End Cart Area =================--
+
+
+
+
+
+
+</body>
+
+{% endblock %}

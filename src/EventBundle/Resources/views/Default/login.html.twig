@@ -1,0 +1,90 @@
+{% extends '@Event/Default/index.html.twig' %}
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block banner %}
+
+
+{% endblock %}
+
+{% block content %}
+
+
+
+    <body class="bg-white">
+
+    <!--================Home Banner Area =================-->
+    <!-- breadcrumb start-->
+    <section class="breadcrumb breadcrumb_bg">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-12">
+                    <div class="breadcrumb_iner">
+                        <div class="breadcrumb_iner_item">
+                            <p>Home/login </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- breadcrumb start-->
+
+    <!--================Tracking Box Area =================-->
+    <section class="tracking_box_area section_padding">
+        <div class="container">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-lg-12">
+                    <div class="tracking_box_inner">
+
+                        {% if error %}
+                            <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                        {% endif %}
+
+                        <form action="{{ path("fos_user_security_check") }}" method="post">
+                            {% if csrf_token %}
+                                <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                            {% endif %}
+                            <div class="col-md-12 form-group">
+
+                                <label for="username">{{ 'Nom de compte'|trans }}</label>
+                                <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" autocomplete="username" />
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <label for="password">{{ 'Mot de passe'|trans }}</label>
+                                <input type="password" id="password" name="_password" required="required" autocomplete="current-password" />
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+                                <label for="remember_me">{{ 'Mémoriser compte'|trans }}</label>
+                            </div>
+                            <input type="submit" id="_submit" name="_submit" value="{{ 'Se connecter'|trans }}" />
+                        </form>
+
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+    <!--================End Tracking Box Area =================-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+
+{% endblock %}

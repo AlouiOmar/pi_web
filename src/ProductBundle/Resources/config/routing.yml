@@ -1,0 +1,145 @@
+product:
+    path:     /
+    defaults: { _controller: ProductBundle:Default:index }
+create:
+    path:     /addProd
+    defaults: { _controller: ProductBundle:Produit:create }
+
+create2:
+    path:     /addProdClient
+    defaults: { _controller: ProductBundle:Produit:create2 }
+
+showProd:
+    path:     /showProd
+    defaults: { _controller: ProductBundle:Produit:showProduit }
+
+prod_deleteTotal:
+    path:     /deleteAll/{idP}
+    defaults: { _controller: ProductBundle:Produit:deleteProd }
+
+prod_delete:
+    path:     /delete/{idP}
+    defaults: { _controller: ProductBundle:Produit:annuler }
+
+prod_update:
+    path:     /update/{idP}
+    defaults: { _controller: ProductBundle:Produit:updateProd }
+
+createCateg:
+    path:     /addCateg
+    defaults: { _controller: ProductBundle:Produit:createCateg }
+
+showCategProd:
+    path:     /showCategProd
+    defaults: { _controller: ProductBundle:Produit:showCategoryProduit }
+Categprod_delete:
+    path:     /deleteCateg/{idTp}
+    defaults: { _controller: ProductBundle:Produit:deleteCategProd }
+
+prod_delete:
+    path:     /delete/{idP}
+    defaults: { _controller: ProductBundle:Produit:annuler }
+prod_delete_Client:
+    path:     /deleteClient/{idP}
+    defaults: { _controller: ProductBundle:Produit:annulerClient }
+
+showHistoryProd:
+    path:     /HistoryProd
+    defaults: { _controller: ProductBundle:Produit:showHistoryProduit }
+
+showProdClient:
+    path:     /showProdClient
+    defaults: { _controller: ProductBundle:Produit:showProduitClient }
+showProduitClientSingle:
+    path:     /showProduitClientSingle{idP}
+    defaults: { _controller: ProductBundle:Produit:showProduitClientSingle }
+
+
+upProduitClientSingle:
+    path:     /updateClient{idP}
+    defaults: { _controller: ProductBundle:Produit:updateClient }
+
+
+
+cart_aff:
+    path:     /panier
+    defaults: { _controller: ProductBundle:Cart:index }
+
+
+
+cart_add:
+    path:     /panier/add/{idP}
+    defaults: { _controller: ProductBundle:Cart:add }
+
+
+cart_remove:
+    path:     /panier/remove/{idP}
+    defaults: { _controller: ProductBundle:Cart:remove }
+
+showHighPrice:
+    path:     /highPrice
+    defaults: { _controller: ProductBundle:Produit:high }
+showLowPrice:
+    path:     /lowPrice
+    defaults: { _controller: ProductBundle:Produit:low }
+
+cart_validate:
+    path:     /panier/validate
+    defaults: { _controller: ProductBundle:Cart:validate }
+
+createMObile:
+    path:     /AddMobile/{idP}/{nomP}/{marqueP}/{categorieP}/{couleurP}/{prixP}/{type}/{photoP}/{tel}/{userid}
+    defaults: { _controller: ProductBundle:ProduitMobile:AddProd}
+
+showProdMobile:
+    path:     /showProdMobile
+    defaults: { _controller: ProductBundle:ProduitMobile:showProdMobile }
+
+showTypeProdMobile:
+    path:     /showTypeProdMobile
+    defaults: { _controller: ProductBundle:ProduitMobile:showTypeProdMobile }
+
+deleteProdMobile:
+    path:     /deleteProdMobile/{idP}
+    defaults: { _controller: ProductBundle:ProduitMobile:deleteProdMobile }
+
+showProdMobileSingle:
+    path:     /ShowMobileSingle/{idP}
+    defaults: { _controller: ProductBundle:ProduitMobile:ShowMobileSingle }
+
+updateProdMobile:
+    path:     /updateProdMobile/{idP}/{nomP}/{marqueP}/{categorieP}/{couleurP}/{prixP}/{tel}
+    defaults: { _controller: ProductBundle:ProduitMobile:updateProdMobile }
+
+highPriceMobile:
+    path:     /highPriceMobile
+    defaults: { _controller: ProductBundle:ProduitMobile:highPriceMobile }
+
+lowPriceMobile:
+    path:     /lowPriceMobile
+    defaults: { _controller: ProductBundle:ProduitMobile:lowPriceMobile }
+
+addPanierMobile:
+    path:     /panier/addPanierMobile/{idP}
+    defaults: { _controller: ProductBundle:ProduitMobile:addPanierMobile }
+
+
+AffichePanierMobile:
+    path:     /panier/AffichePanierMobile
+    defaults: { _controller: ProductBundle:ProduitMobile:AffichePanierMobile }
+
+RemovePanierMobile:
+    path:     /panier/RemovePanierMobile/{idP}
+    defaults: { _controller: ProductBundle:ProduitMobile:RemovePanierMobile }
+
+logMobile:
+    path:     /logMobile/{email}
+    defaults: { _controller: ProductBundle:ProduitMobile:LoginMobile }
+
+showUserMobile:
+    path:     /showUserMobile
+    defaults: { _controller: ProductBundle:ProduitMobile:showUserMobile }
+
+reclamation_user:
+    path: /getUser
+    defaults: { _controller: ProductBundle:ProduitMobile:loginUser}

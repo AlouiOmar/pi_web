@@ -131,13 +131,16 @@
                         <div class="col-lg-12">
                             <div class="product_top_bar d-flex justify-content-between align-items-center">
                                 <div class="single_product_menu product_bar_item">
-                                    <h2>Liste des annonces</h2>
+                                    <h2>Liste des annonces
+                                       ({{ (annonces.getTotalItemCount ) }})
+                                    </h2>
                                 </div>
 
                             </div>
 
                         </div>
-                        {% if annonces!=null %}
+                        {#{{ dump(annonces.getTotalItemCount ) }}#}
+                        {% if annonces.getTotalItemCount!=0 %}
                        {% for annonce in annonces %} <div class="col-lg-4 col-sm-6">
                             <div class="single_category_product">
                                 <div class="single_category_img">
@@ -155,6 +158,9 @@
                                 </div>
                             </div>
                         </div>{% endfor %}
+                            <div class="col-lg-12 navigation">
+                                {{ knp_pagination_render(annonces) }}
+                            </div>
                         {% else %}
                           <div style="margin-left: 18px;">Aucun résultat ne correspond à votre recherche!</div>
                     {% endif %}

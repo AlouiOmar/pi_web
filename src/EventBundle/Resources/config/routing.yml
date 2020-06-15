@@ -1,0 +1,133 @@
+event_event:
+    resource: "@EventBundle/Resources/config/routing/event.php"
+    prefix:   /event
+
+event_homepage:
+    path:     /
+    defaults: { _controller: EventBundle:Default:index }
+
+event_create:
+    path:     /creerevent
+    defaults: { _controller: EventBundle:Event:CreateEvent }
+
+event_show:
+    path:     /showevent
+    defaults: { _controller: EventBundle:Event:ShowEvent }
+
+vosevent_show:
+    path: /vosevent
+    defaults: { _controller: EventBundle:Event:VosEvent }
+
+event_edit:
+    path:     /editevent/{id}
+    defaults: { _controller: EventBundle:Event:EditEvent }
+
+event_delete:
+    path:     /deletevent/{id}
+    defaults: { _controller: EventBundle:Event:DeleteEvent }
+
+event_participer:
+    path: /participer/{id}
+    defaults: { _controller: EventBundle:Participation:participation }
+
+ajax_search:
+    path:     /searchtitre
+    defaults: { _controller: EventBundle:Event:searchtitre }
+
+annuler_participer:
+    path: /annulerp/{id}
+    defaults: { _controller: EventBundle:Participation:annulerparticipation}
+
+annuler_participation:
+    path: /annulerparticipation/{id}
+    defaults: { _controller: EventBundle:Participation:AnnulerParticipation}
+
+show_participants:
+    path: participant/{id}
+    defaults: { _controller: EventBundle:Participation:afficherparticipant}
+
+meteo:
+    path: /meteo
+    defaults: { _controller: EventBundle:Event:weatherBasicLarge}
+
+home_dashboard:
+    path: /indexdashboard
+    defaults: { _controller: EventBundle:EventAdmin:IndexDash }
+
+show_dash:
+    path: /showeventdash
+    defaults: { _controller: EventBundle:EventAdmin:ShowEventDash }
+
+add_dash:
+    path: /addeventdash
+    defaults: { _controller: EventBundle:EventAdmin:CreateEventAdmin}
+
+vosevent_dash:
+    path: /voseventdash
+    defaults: { _controller: EventBundle:EventAdmin:VosEventAdmin }
+
+edit_dash:
+    path:     /editeventdash/{id}
+    defaults: { _controller: EventBundle:EventAdmin:EditEventAdmin }
+
+delete_dash:
+    path:     /deleteventdash/{id}
+    defaults: { _controller: EventBundle:EventAdmin:DeleteEventAdmin }
+
+participer_dash:
+    path: /participerdash/{id}
+    defaults: { _controller: EventBundle:EventAdmin:ParticipationAdmin }
+
+ajax_search_dash:
+    path:     /searchtitredash
+    defaults: { _controller: EventBundle:EventAdmin:SearchTitreAdmin }
+
+annuler_dash:
+    path: /annulerpdash/{id}
+    defaults: { _controller: EventBundle:EventAdmin:AnnulerParticipationAdmin}
+
+participants_dash:
+    path: participantdash/{id}
+    defaults: { _controller: EventBundle:EventAdmin:AfficherParticipantAdmin}
+
+cdo_create_event:
+    path: /mobile/createevent
+    defaults: {_controller: EventBundle:CodeNameOne:CreateEventMobile}
+
+cdo_edit_event:
+    path: /mobile/editevent/{id}
+    defaults: {_controller: EventBundle:CodeNameOne:EditEventMobile}
+
+cdo_show_event:
+    path: /mobile/showevent
+    defaults: {_controller: EventBundle:CodeNameOne:ShowEventMobile}
+
+cdo_delete_event:
+    path: /mobile/deleteevent/{id}
+    defaults: {_controller: EventBundle:CodeNameOne:DeleteEventMobile}
+
+cdo_event_participer:
+    path: mobile/participer/{id}
+    defaults: { _controller: EventBundle:CodeNameOne:participationMobile}
+
+cdo_annuler_participation:
+    path: mobile/login
+    defaults: { _controller: EventBundle:CodeNameOne:loginMobile}
+
+cdo_show_participants:
+    path: mobile/participant/{id}
+    defaults: { _controller: EventBundle:CodeNameOne:afficherparticipantMobile}
+
+cdo_login:
+    path: mobile/participant/{id}
+    defaults: { _controller: EventBundle:CodeNameOne:ParticipantsMobile}
+
+cdo_show_users:
+    path: mobile/users
+    defaults: { _controller: EventBundle:CodeNameOne:ShowUsersMobile}
+
+cdo_weather:
+    path: /mobile/weather
+    defaults: { _controller: EventBundle:CodeNameOne:weatherget}
+
+

@@ -1,0 +1,54 @@
+{% extends 'base2.html.twig' %}
+{% block content %}
+    <div class="bg-light p-3">
+        <h1> Vos favoris</h1>
+
+    </div>
+    {% if items | length > 0  %}
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Produit</th>
+                <th>Prix</th>
+                <th>Quantité</th>
+                <th>Téléphone publicateur</th>
+                <th>Total</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in items %}
+                <tr>
+                    <td> {{ item.product.nomP}} </td>
+                    <td> {{ item.product.prixP }} </td>
+                    <td> {{ item.quantity }} </td>
+                    <td> {{ item.product.tel }} </td>
+                    <td> {{ item.product.prixP * item.quantity }}</td>
+                    <td>
+                        <a href="{{path('cart_remove',{'idP':item.product.idP})}}" class="btn btn-danger btn-sm">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="3" class="text-right"> Total :</td>
+            <td> {{ total }}</td>
+            <td></td>
+        </tr>
+        </tfoot>
+        </table>
+
+        <br>
+        <br>
+        <a  href="{{ path('cart_validate') }}">
+            <button type="button" class="btn btn-danger" >Générer votre devis
+            </button></a>
+    {% else%}
+        <p> Votre liste des favoris est vide !</p>
+    {% endif %}
+
+
+{% endblock %}
