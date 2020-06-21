@@ -6,6 +6,9 @@ security:
     role_hierarchy:
         ROLE_ADMIN:       ROLE_USER
         ROLE_SUPER_ADMIN: ROLE_ADMIN
+        ROLE_CLIENT:      ROLE_CLIENT
+        ROLE_LOCATAIRE:   ROLE_LOCATAIRE
+
 
     providers:
         fos_userbundle:

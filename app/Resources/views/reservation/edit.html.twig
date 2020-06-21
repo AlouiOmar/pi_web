@@ -1,0 +1,17 @@
+{% extends 'basen1.html.twig' %}
+
+{% block body %}
+{% block title %} <div class="text-center" ><h1> Modifier reservation : client</h1> <br/> {% endblock %}
+<br>
+    {{ form_start(edit_form) }}
+        {{ form_widget(edit_form) }}
+        <input type="submit" value="Edit" />
+    {{ form_end(edit_form) }}
+
+    <ul>
+        <li>
+            <a href="{{ path('reservation_show') }}">Retour</a>
+        </li>
+       
+    </ul>
+{% endblock %}

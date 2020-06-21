@@ -1,0 +1,21 @@
+{% extends 'basen1.html.twig' %}
+
+{% block body %}
+
+    {% if is_granted ('ROLE_USER') %}
+
+<div class="container">
+    <div class="text-center" ><h1> mise a jour location  2</h1> <br/> </div>
+    </br>
+
+    <div class="container">
+        {{ form_start(form) }}
+
+        {{ form_widget(form) }}
+
+        {{ form_end(form) }}
+
+    </div>
+    {% endif %}
+    {% endblock %}
+

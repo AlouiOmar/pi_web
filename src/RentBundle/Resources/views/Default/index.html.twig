@@ -1,0 +1,8 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+  {% block title %}  <div class="text-center" ><h1> Accueil  </h1> <br/> {% endblock %}
+<br>
+    <a href="{{ path('location_new', { 'id': reservation.id }) }}" class="btn btn-success btn-sm"> Louer </a>
+    <a href="{{ path('reservation_new', { 'id': reservation.id }) }}" class="btn btn-danger btn-sm"> Reserver </a>   
+{% endblock %}

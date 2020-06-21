@@ -1,15 +1,15 @@
 
 
-aa:
-    path:     /
-    defaults: { _controller: BlogBundle:Blog:home }
-
-
-
-
-home:
-    path:     /home
-    defaults: { _controller: BlogBundle:Blog:home }
+#aa:
+#    path:     /
+#    defaults: { _controller: BlogBundle:Blog:home }
+#
+#
+#
+#
+#home:
+#    path:     /home
+#    defaults: { _controller: BlogBundle:Blog:home }
 
     #login:
 # path:     /login

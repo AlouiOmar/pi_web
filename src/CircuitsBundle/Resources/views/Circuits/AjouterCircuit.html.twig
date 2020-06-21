@@ -1,0 +1,59 @@
+
+
+{% extends 'basez1.html.twig' %}
+
+{% block content %}
+
+
+    {{ form_start(form)}}
+    <div class="container">
+        <h1>Ajouter un Circuit</h1>
+
+
+        <div class="form-group">
+            {{ form_label(form.nom, 'Nom')}}
+            {{ form_widget(form.nom,{'attr':{'class':'form-control'}})}}
+            {{ form_errors(form.nom)}}
+
+        </div>
+        <div class="form-group">
+            {{ form_label(form.depart, 'depart' )}} <br>
+            {{ form_widget(form.depart,{'attr':{'class':'form-control'}})}}
+            {{ form_errors(form.depart)}}
+
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.pause, 'Pause' )}}
+            {{ form_widget(form.pause,{'attr':{'class':'form-control'}})}}
+            {{ form_errors(form.pause)}}
+
+        </div>
+        <div class="form-group">
+            {{ form_label(form.end, 'End' )}}
+            {{ form_widget(form.end,{'attr':{'class':'form-control'}})}}
+            {{ form_errors(form.end)}}
+
+        </div>
+        <div class="form-group">
+            {{ form_label(form.difficulty, 'Difficulty' )}}
+            {{ form_widget(form.difficulty,{'attr':{'class':'form-control'}})}}
+            {{ form_errors(form.difficulty)}}
+
+        </div>
+        <div class="form-group">
+            {{ form_label(form.distance, 'Distance' )}}
+            {{ form_widget(form.distance,{'attr':{'class':'form-control'}})}}
+            {{ form_errors(form.distance)}}
+
+        </div>
+
+
+
+        <div class="col-md-12 form-group p_star"> {{ form_row(form.Save)}}</div>
+
+    </div>
+    {{ form_end(form)}}
+
+{% endblock %}
+

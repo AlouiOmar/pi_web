@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<!-- Page Content -->
+    <br>   <br>
+    
+          <div class="text-center" ><h1> Affichage reservation </h1> <br/> </div>
+
+    <br>   <br>
+
+    <table class="table_striped">
+
+        <tbody>
+            <tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ reservation.titre }}</td>
+            </tr>
+                <th>Date debut</th>
+                <td>{% if reservation.dateDeb %}{{ reservation.dateDeb|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Date fin</th>
+                <td>{% if reservation.dateFin %}{{ reservation.dateFin|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+    <br>   <br>
+    {% if is_granted ('ROLE_CLIENT') %}
+        <td>                  
+
+            <a href="{{ path('reservation_delete', { 'id': reservation.id }) }}" class="btn btn-danger "> Supprimer </a>                    
+        </td>
+ {% endif %}
+         <br>       <br>   <br>   <br>   <br>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'basen1.html.twig' %}
+
+ {% block title %} Velo.tn {% endblock %}
+{% block body %}
+{% if is_granted ('ROLE_USER') %}
+    <br><br>
+<div class="text-center" ><h1> Recherche des locations disponible </h1> <br/>
+<br><br>
+
+
+    <div class="col-sm-3">
+    <form method="POST">
+<input type="text" name="titre">
+<input type ="submit" value="search"> 
+</form>
+    </div>
+    <br><br><br>
+
+    <table border="2">
+
+     <thead>
+            <tr>  
+
+                <th>Titre</th>
+                <th>Lieu</th>
+                <th>Prix</th>
+                <th>Photo</th>
+                <th>Publié le</th>
+
+            </tr>
+        </thead>
+
+        <tbody>
+        {% for l in location %}
+        <tr>
+            <td>{{ l.titre }}</td>
+            <td>{{ l.lieu }}</td>
+            <td>{{ l.prix }}</td>
+            <td>{{ l.photo }}</td>
+            <td>{{ l.dateCreation |date('Y-m-d') }}</td>
+
+         <td>
+                <a href="{{ path('reservation_new') }}" class="btn btn-primary btn-sm">Reserver</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</div>
+    </tbody>
+    <br><br><<br>
+  {% endif %}
+{% endblock %}

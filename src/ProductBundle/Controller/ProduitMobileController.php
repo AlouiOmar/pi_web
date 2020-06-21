@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
-use UserBundle\Entity\User;
+use AppBundle\Entity\User;
 
 class ProduitMobileController extends Controller
 {
@@ -33,12 +33,21 @@ class ProduitMobileController extends Controller
         $produit->setPhotoP($request->get('photoP'));
         $produit->setTel($request->get('tel'));
 
-        $userid=$this->getDoctrine()->getManager()->getRepository('UserBundle:User')->find($request->get('userid'));
+        $userid=$this->getDoctrine()->getManager()->getRepository(User::class)->find($request->get('userid'));
         $produit->setId($userid);
         $em->persist($produit);
         $em->flush();
         $serializer = new Serializer([new ObjectNormalizer()]);
-        $formatted = $serializer->normalize($produit);
+        $normalizer = new ObjectNormalizer();
+        $normalizer->setCircularReferenceLimit(2);
+        $normalizer->setCircularReferenceHandler(function ($object) {
+            return $object->getId();
+        });
+        $normalizers = array($normalizer);
+        $serializer = new Serializer($normalizers);
+        $formatted = $serializer->normalize(array(
+            "response" => 200,
+        ));
         return new JsonResponse($formatted);
     }
 
@@ -49,7 +58,17 @@ class ProduitMobileController extends Controller
 
     public function showProdMobileAction(){
         $produit = $this->getDoctrine()->getRepository(\ProductBundle\Entity\Produit::class)->findAll();
+//        dump($produit);
+//        die();
         $serializer = new Serializer([new ObjectNormalizer()]);
+        $normalizer = new ObjectNormalizer();
+        $normalizer->setCircularReferenceLimit(2);
+        $normalizer->setCircularReferenceHandler(function ($object) {
+            return $object->getId();
+        });
+        $normalizers = array($normalizer);
+        $serializer = new Serializer($normalizers);
+
         $formatted=$serializer->normalize($produit);
         return new JsonResponse($formatted);
 
@@ -60,6 +79,13 @@ class ProduitMobileController extends Controller
     {
         $produit = $this->getDoctrine()->getRepository('ProductBundle:Produit')->find($idP);
         $serializer = new Serializer([new ObjectNormalizer()]);
+        $normalizer = new ObjectNormalizer();
+        $normalizer->setCircularReferenceLimit(2);
+        $normalizer->setCircularReferenceHandler(function ($object) {
+            return $object->getId();
+        });
+        $normalizers = array($normalizer);
+        $serializer = new Serializer($normalizers);
         $formatted=$serializer->normalize($produit);
         return new JsonResponse($formatted);
 
@@ -76,6 +102,13 @@ class ProduitMobileController extends Controller
         $em->remove($prod);
         $em->flush();
         $serializer = new Serializer([new ObjectNormalizer()]);
+        $normalizer = new ObjectNormalizer();
+        $normalizer->setCircularReferenceLimit(2);
+        $normalizer->setCircularReferenceHandler(function ($object) {
+            return $object->getId();
+        });
+        $normalizers = array($normalizer);
+        $serializer = new Serializer($normalizers);
         $formatted = $serializer->normalize($prod);
         return new JsonResponse($formatted);
 
@@ -99,6 +132,13 @@ class ProduitMobileController extends Controller
         $em->persist($prod);
         $em->flush();
         $serializer = new Serializer([new ObjectNormalizer()]);
+        $normalizer = new ObjectNormalizer();
+        $normalizer->setCircularReferenceLimit(2);
+        $normalizer->setCircularReferenceHandler(function ($object) {
+            return $object->getId();
+        });
+        $normalizers = array($normalizer);
+        $serializer = new Serializer($normalizers);
         $formatted = $serializer->normalize($prod);
         return new JsonResponse($formatted);
     }
@@ -110,6 +150,13 @@ class ProduitMobileController extends Controller
         $em = $this->getDoctrine()->getManager();
         $rep = $em->getRepository(\ProductBundle\Entity\Produit::class)->findBy([], ['prixP' => 'DESC']);
         $serializer = new Serializer([new ObjectNormalizer()]);
+        $normalizer = new ObjectNormalizer();
+        $normalizer->setCircularReferenceLimit(2);
+        $normalizer->setCircularReferenceHandler(function ($object) {
+            return $object->getId();
+        });
+        $normalizers = array($normalizer);
+        $serializer = new Serializer($normalizers);
         $formatted = $serializer->normalize($rep);
         return new JsonResponse($formatted);
     }
@@ -120,6 +167,13 @@ class ProduitMobileController extends Controller
         $em = $this->getDoctrine()->getManager();
         $rep = $em->getRepository(\ProductBundle\Entity\Produit::class)->findBy([], ['prixP' => 'ASC']);
         $serializer = new Serializer([new ObjectNormalizer()]);
+        $normalizer = new ObjectNormalizer();
+        $normalizer->setCircularReferenceLimit(2);
+        $normalizer->setCircularReferenceHandler(function ($object) {
+            return $object->getId();
+        });
+        $normalizers = array($normalizer);
+        $serializer = new Serializer($normalizers);
         $formatted = $serializer->normalize($rep);
         return new JsonResponse($formatted);
     }
@@ -215,8 +269,15 @@ class ProduitMobileController extends Controller
     }
 
     public function showUserMobileAction(){
-        $user = $this->getDoctrine()->getRepository(\UserBundle\Entity\User::class)->findAll();
+        $user = $this->getDoctrine()->getRepository(User::class)->findAll();
         $serializer = new Serializer([new ObjectNormalizer()]);
+        $normalizer = new ObjectNormalizer();
+        $normalizer->setCircularReferenceLimit(2);
+        $normalizer->setCircularReferenceHandler(function ($object) {
+            return $object->getId();
+        });
+        $normalizers = array($normalizer);
+        $serializer = new Serializer($normalizers);
         $formatted=$serializer->normalize($user);
         return new JsonResponse($formatted);
 
@@ -229,8 +290,15 @@ class ProduitMobileController extends Controller
     public function loginUserAction (Request $request)
     {
         $username=$request->get('username');
-        $user=$this->getDoctrine()->getManager()->getRepository('UserBundle:User')->findOneBy(array('username'=>$username));
+        $user=$this->getDoctrine()->getManager()->getRepository(User::class)->findOneBy(array('username'=>$username));
         $serializer = new Serializer([new ObjectNormalizer()]);
+        $normalizer = new ObjectNormalizer();
+        $normalizer->setCircularReferenceLimit(2);
+        $normalizer->setCircularReferenceHandler(function ($object) {
+            return $object->getId();
+        });
+        $normalizers = array($normalizer);
+        $serializer = new Serializer($normalizers);
         $formatted = $serializer->normalize($user);
         return new JsonResponse($formatted);
     }

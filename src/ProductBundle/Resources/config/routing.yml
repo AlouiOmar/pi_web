@@ -88,7 +88,7 @@ cart_validate:
     defaults: { _controller: ProductBundle:Cart:validate }
 
 createMObile:
-    path:     /AddMobile/{idP}/{nomP}/{marqueP}/{categorieP}/{couleurP}/{prixP}/{type}/{photoP}/{tel}/{userid}
+    path:     /AddMobile/
     defaults: { _controller: ProductBundle:ProduitMobile:AddProd}
 
 showProdMobile:

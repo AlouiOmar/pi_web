@@ -1,0 +1,40 @@
+{% extends 'basen1.html.twig' %}
+
+{% block body %}
+    {% block title %} velo.tn {% endblock %}
+<!-- Page Content -->
+    <div class="container">
+      <div class="row">
+         <div class="text-center" ><h1> Affichage location </h1> <br/>
+            <br>
+          <div class="list-group">      
+              <a href="{{ path('location_show',{'id':location.id}) }}" </a>
+          </div>
+        </div> 
+            <img class="card-img-top img-fluid" src="{{ asset(location.photo) }}" alt="" style="width:12.5em">
+            <div class="card-body">
+              <h3 class="card-title">{{ location.titre }}</h3>
+              <h4>{{ location.prix }}DT</h4>
+              <h4>{{ location.rating }}</h4>
+                <h4>{{ location.dateCreation }}</h4>
+              <br><br>
+                  <div>
+                      {% if is_granted ('ROLE_CLIENT') %}  <!--client-->
+                          <td>
+                              <a href="{{ path('reservation_new') }}" class="btn btn-primary btn-sm">Reserver</a>
+                          </td>
+                      {% elseif is_granted (' ROLE_LOCATAIRE') %}
+                          <td>  <!--locataire-->
+                              <a href="{{ path('location_edit', { 'id': location.id }) }} " class="btn btn-warning btn-sm"> Modifier </a>
+                          </td>
+                      {% elseif is_granted (' ROLE_SUPER_ADMIN') %}
+                          <a href="{{ path('location_delete', { 'id': location.id }) }} " class="btn btn-warning btn-sm"> Supprimer </a>
+                      {% endif %}
+                    </div>
+          </div>
+          <!-- /.card -->
+
+      </div>
+    </div>
+    <!-- /.container -->
+{% endblock %}

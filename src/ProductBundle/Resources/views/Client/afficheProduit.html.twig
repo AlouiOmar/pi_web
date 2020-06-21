@@ -36,7 +36,7 @@
                         <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
                             <div class="products-single fix">
                                 <div class="border border-y rounded p-2">
-                                    <img src="{{ asset('/public/uploads/')~i.photoP }}" class="rounded-lg" alt="Image">
+                                    <img src="{{ asset('public/uploads/'~i.photoP )}}" class="rounded-lg" alt="Image">
                                     <div class="box-img-hover">
                                         <div class="type-lb">
                                             <p class="new">{{ i.nomP }}</p>
@@ -52,7 +52,7 @@
                                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                                         <div class="mask-icon">
                                             <ul>
-                                                {% if app.user.id == i.id %}
+                                                {% if app.user.id == i.id.id %}
                                                     <li><a href="{{ path('showProduitClientSingle',{'idP':i.idP}) }}"
                                                            data-toggle="tooltip" data-placement="right" title="Compare"><i
                                                                     class="fas fa-sync-alt"></i></a></li>
@@ -65,7 +65,7 @@
                                                        data-toggle="tooltip" data-placement="right" title="View"><i
                                                                 class="fas fa-eye"></i></a></li>
                                             </ul>
-                                            {% if app.user.id != i.id %}
+                                            {% if app.user.id != i.id.id %}
                                                 <a class="cart" href="{{ path('cart_add',{'idP':i.idP}) }}"><i
                                                             class="fas fa-shopping-cart"></i> Ajouter au favoris</a>
                                             {% endif %}

@@ -1,0 +1,150 @@
+
+get_circuits:
+    path:     /getCircuits
+    defaults: { _controller: CircuitsBundle:Circuits:getCircuits }
+
+get_circuitsU:
+  path:     /getCircuitsU
+  defaults: { _controller: CircuitsBundle:Circuits:getCircuitsU }
+
+
+
+get_stations:
+    path:     /getStations
+    defaults: { _controller: CircuitsBundle:Stations:getStations }
+
+get_stationsU:
+  path:     /getStationsU
+  defaults: { _controller: CircuitsBundle:Stations:getStationsU }
+
+createc:
+    path:     /addCircuit
+    defaults: { _controller: CircuitsBundle:Circuits:create }
+
+createcU:
+  path:     /addCircuitU
+  defaults: { _controller: CircuitsBundle:Circuits:createU }
+
+
+circuit_delete:
+    path:     /delete/{id}
+    defaults: { _controller: CircuitsBundle:Circuits:deleteCircuit }
+
+circuit_deleteU:
+  path:     /deleteU/{id}
+  defaults: { _controller: CircuitsBundle:Circuits:deleteCircuitU }
+
+
+station_delete:
+    path:    /deleteS/{id}
+    defaults: { _controller: CircuitsBundle:Stations:deleteStation }
+
+
+
+update_circuit:
+        path:     /update/{id}
+        defaults: { _controller: CircuitsBundle:Circuits:updateCircuit }
+
+update_circuitU:
+  path:     /updateU/{id}
+  defaults: { _controller: CircuitsBundle:Circuits:updateCircuitU }
+
+
+
+update_circuit_Mobile:
+  path:     /updateCircuitMobile/{id}/{nom}/{begin}/{pause}/{end}/{difficulty}/{distance}
+  defaults: { _controller: CircuitsBundle:Circuits:updateCircuitMobile }
+
+
+update_station:
+    path:     /updateS/{id}
+    defaults: { _controller: CircuitsBundle:Stations:updateStation }
+
+
+creates:
+    path:     /addStation
+    defaults: { _controller: CircuitsBundle:Stations:ajouter }
+
+
+circuits_api_homepage:
+  path:     /
+  defaults: { _controller: CircuitsBundle:Default:index }
+
+get_allCircuits:
+  path:     /getCircuitMobile
+  defaults: { _controller: CircuitsBundle:Circuits:getCircuitMobile }
+
+
+find_high_Diff:
+  path:     /HighDistMobile
+  defaults: { _controller: CircuitsBundle:Circuits:highDistMobile}
+
+find_low_Dist:
+  path:     /LowDistMobile
+  defaults: { _controller: CircuitsBundle:Circuits:lowDistMobile}
+
+
+delete_Circuit_mobile:
+  path:     /deleteCircuitMobile/{id}
+  defaults: { _controller: CircuitsBundle:Circuits:deleteCircuitMobile}
+
+
+delete_Circuit_by_name_mobile:
+  path:     /deleteCircuitMobileByName/{name}
+  defaults: { _controller: CircuitsBundle:Circuits:deleteCircuitByName}
+
+
+delete_Station_mobile:
+  path:     /deleteStationMobile/{id}
+  defaults: { _controller: CircuitsBundle:Stations:deleteStationMobile}
+
+
+
+add_circuit_mobile:
+  path:     /addCircuitMobile/{userId}/{nom}/{begin}/{pause}/{end}/{difficulty}/{distance}
+  defaults: { _controller: CircuitsBundle:Circuits:addCircuitMobile  }
+
+
+circuit_single:
+  path:     /circuitSingle/{id}
+  defaults: {_controller: CircuitsBundle:Circuits:circuitSingle }
+
+add_station_mobile:
+  path:     /addStationMobile/{nom}/{lattitude}/{longitude}
+  defaults: { _controller: CircuitsBundle:Stations:addStationMobile }
+
+get_allStations:
+  path:     /getStationMobile
+  defaults: { _controller: CircuitsBundle:Stations:getStationMobile }
+
+
+showUserMobile:
+  path:     /showUserMobile
+  defaults: { _controller: CircuitsBundle:Circuits:showUserMobile }
+
+showHighDist:
+  path:     /highDist
+  defaults: { _controller: CircuitsBundle:Circuits:highCU }
+
+showLowDist:
+  path:     /lowDist
+  defaults: { _controller: CircuitsBundle:Circuits:lowCU }
+
+
+
+test_homepage:
+  path:     /
+  defaults: { _controller: CircuitsBundle:Stations:index}
+
+global_point:
+  path:     /
+  defaults: { _controller: CircuitsBundle:Stations:indexglobal }
+
+addcomments:
+  path:     /addcomments
+  defaults: { _controller: CircuitsBundle:Circuits:addcomments }
+
+delete_comment:
+  path:     /deleteComment/{id}/{idCircuit}
+  defaults: { _controller: CircuitsBundle:Circuits:deleteComment }
+

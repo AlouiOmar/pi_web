@@ -1,0 +1,42 @@
+{% extends 'basen1.html.twig' %}
+
+{% block body %}
+
+<!-- Page Content -->
+    <div class="container">
+
+      <div class="row">
+
+        <div class="col-lg-3">
+        {% block title %} <div class="text-center" ><h1> Affichage reservation </h1> <br/> {% endblock %}
+<br>
+
+          <div class="list-group">
+          {% for location in locations %}
+              <a href="{{ path('location_show',{'id':location.id}) }}" class="list-group-item {% if location== location.getLocation() %}active{% endif %}">{{ location.titre }}</a>
+          {% endfor %}
+          </div>
+        </div>
+        <!-- /.col-lg-3 -->           
+        <tbody>
+        <tr>
+        <th>Titre</th>
+        <td>{{ reservation.titre }}</td>
+        </tr>
+            <tr>
+                <th>Datedeb</th>
+                <td>{% if reservation.dateDeb %}{{ reservation.dateDeb|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Datefin</th>
+                <td>{% if reservation.dateFin %}{{ reservation.dateFin|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+        <td>                  
+            <a href="{{ path('reservation_edit', { 'id': reservation.id }) }}" class="btn btn-warning btn-sm"> Modifier </a>
+            <a href="{{ path('reservation_delete', { 'id': reservation.id }) }}" class="btn btn-danger btn-sm"> Supprimer </a>                    
+        </td>
+                {% endif %}
+      
+{% endblock %}

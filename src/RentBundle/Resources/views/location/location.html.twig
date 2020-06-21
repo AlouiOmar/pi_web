@@ -1,0 +1,79 @@
+{% extends 'basen1.html.twig' %}
+
+{% block body %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+
+<div class="text-center" ><h1> Liste des locations disponible </h1> </div>
+    <br/><br>
+
+
+    <div class="dropdown">
+        <button type="button" class="btn btn-outline-info dropdown-toggle" data-toggle="dropdown">
+          Filtrer par
+        </button>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" href="{{ path('tri_prix_asc') }}"> prix bas</a>
+            <a class="dropdown-item" href="{{ path('tri_prix_Desc') }}"> prix haut </a>
+            <a class="dropdown-item" href="{{ path('tri_date_asc') }}"> plus ancien </a>
+            <a class="dropdown-item" href="{{ path('tri_date_Desc') }}"> plus récent</a>
+        </div>
+    </div>
+<br>
+    <br>
+    <div class="container">
+
+    <table class="table_striped">
+        <thead>
+            <tr>  
+                <th>Photo</th>            
+                <th>Titre</th>              
+                <th>Prix DT</th>            
+
+                <th>Publié le</th>
+                <th>Lieu</th>
+                <th>Locataire</th>
+                <th>Email locataire</th>
+
+            </tr>
+        </thead>
+
+        <tbody>
+        {% for location in locations %}
+            <tr>
+               <td>{{ location.photo }}</td>
+                <td>{{ location.titre }}</td>           
+                <td>{{ location.prix }}</td>            
+
+                <td>{{ location.dateCreation |date('Y-m-d') }}</td>
+                <td>{{ location.lieu }}</td>
+                <td></td>
+                <td></td>
+
+                <TD>
+         <a href="{{ path('location_show', { 'id': location.id }) }}" class="btn btn-primary btn-sm">Afficher</a>
+
+         <a href="{{ path('location_delete', { 'id': location.id }) }}" class="btn btn-danger btn-sm"> Supprimer </a>
+
+                </TD>
+                
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+    <br>   <br>
+
+    <ul>
+        <li>
+
+            <a  href="{{ path('location_new') }}"type="button" class="btn btn-outline-info">Create a new location</a>
+        </li>
+    </ul>
+
+    <br>   <br>
+    </div>
+{% endblock %}

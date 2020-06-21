@@ -145,3 +145,4 @@ piano_solo_weather:
     options:
         download_csv: true # Default True
         cache: false # Default False (To use cache the system needs Php-Apc cache)
+

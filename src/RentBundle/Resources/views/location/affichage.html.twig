@@ -1,0 +1,109 @@
+{% extends 'basen1.html.twig' %}
+
+{% block body %}
+<br><br>
+
+
+    <div class="product-item-filter row">
+        <div class="col-12 col-sm-8 text-center text-sm-left">
+            <button type="button" class="btn btn-outline-info dropdown-toggle" data-toggle="dropdown">
+                <span> <b> <font size="4" >Filtrer par : </font> </b></span>
+            </button>
+                <br>   <br>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" href="{{ path('tri_prix_asc') }}"> prix bas</a>
+            <a class="dropdown-item" href="{{ path('tri_prix_Desc') }}"> prix haut </a>
+            <a class="dropdown-item" href="{{ path('tri_date_asc') }}"> plus ancien </a>
+            <a class="dropdown-item" href="{{ path('tri_date_Desc') }}"> plus récent</a>
+        </div>
+        </div>
+    </div>
+
+    <p>NB: Avant de reserver veuillez consulter la calendrier </p>
+    <a href="{{ path('reservation_calendar') }}" class="btn btn-link btn-sm"> Consulter </a>
+<br>       <br>   <br>
+
+<div class="product-categorie-box">
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane fade show active" id="grid-view">
+            <div class="row">
+                {% for location in locations %}
+                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
+                    <div class="products-single fix" >
+                        <div class="border border-y rounded p-2" >
+                            <img class="card-img rounded-0" style="width: 100%; height: 300px;" src="{{ asset('img/' ~ location.photo) }}" alt="">
+
+                            <div class="box-img-hover">
+
+                                <div class="type-lb">
+                                    <p class="new">{{ location.titre }}</p>
+                                </div>
+
+                                <div class="why-text">
+                                    <h4>{{ location.prix }} DT</h4>
+                                </div>
+                            </div>
+
+                            <div class="why-text">
+                                <h4>{{ location.lieu }}</h4>
+                            </div>
+                        </div>
+
+                        <div class="why-text">
+                            <h4>publié le {{ location.dateCreation|date('Y-m-d')  }}</h4>
+                        </div>
+                    </div>
+
+                    <div class="mask-icon">
+                        <ul>
+                            <li><a href="{{ path('location_show',{'id':location.id},{'titre':location.titre},{'photo':location.photo})}}" data-toggle="tooltip" data-placement="right" title="show"><i class="fas fa-eye"></i></a></li>
+                            <li></li><a class="cart" href="{{ path('reservation_new',{'id':location.id}) }}" title="reserver"><i class="fas fa-shopping-cart"></i> </a></li>
+
+                             <li><a href="{{ path('location_edit',{'id':location.id}) }}" data-toggle="tooltip" data-placement="right" title="update"><i class="fas fa-sync-alt"></i></a></li>
+                                <li><a href="{{ path('location_delete',{'id':location.id}) }}" data-toggle="tooltip" data-placement="right" title="delete"><i class="fas fa-trash"></i></a></li>
+
+                                <li><a href="{{ path('location_delete',{'id':location.id}) }}" data-toggle="tooltip" data-placement="right" title="delete"><i class="fas fa-trash"></i></a></li>
+
+                        </ul>
+                    </div>
+
+                            </div>
+                            <br>
+                       </div>
+                    </div>
+                    <br>
+
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="pagination pagination-sm m-0 float-right ">
+        {{ knp_pagination_render(locations) }}
+    </div>
+    </div>
+
+    <script>
+        function price() {
+            var selected = document.getElementById('pricehigh').options[document.getElementById('pricehigh').selectedIndex];
+            console.log(selected.value);
+            {% for location in locations %}
+            if(selected.value == 1) {
+                window.location.replace("{{ path('location_show', { 'id': location.id }) }}" );
+
+            }
+            if(selected.value == 2) {
+                window.location.replace("{{ path('tri_prix_Desc') }}");
+            }
+            else if (selected.value == 3) {
+                window.location.replace("{{ path('tri_prix_asc') }}");
+            }else {
+                window.location.replace("{{ path('location_show', { 'id': location.id }) }}" );
+            }
+            {% endfor %}
+        }
+    </script>
+
+
+
+{% endblock %}

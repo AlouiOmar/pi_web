@@ -5,7 +5,7 @@ namespace EventBundle\Controller;
 use EspritApiBundle\Entity\Task;
 use EventBundle\Entity\Event;
 use EventBundle\Entity\Participation;
-use EventBundle\Entity\User;
+use AppBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -190,7 +190,7 @@ class CodeNameOneController extends Controller
     public function ShowUsersMobileAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $event = $em->getRepository('EventBundle:User')->findAll();
+        $event = $em->getRepository(User::class)->findAll();
         $normalizer = new ObjectNormalizer();
         $normalizer->setCircularReferenceLimit(2);
         $normalizer->setCircularReferenceHandler(function ($object) {

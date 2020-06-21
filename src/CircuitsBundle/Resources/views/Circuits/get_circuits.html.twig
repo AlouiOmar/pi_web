@@ -1,0 +1,119 @@
+{% extends 'basez1.html.twig' %}
+{% block content %}
+
+
+    <script type="text/javascript" src="{{ asset('vendor/js/socialite.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('vendor/js/socialite.min.js') }}"></script>
+    <!--...-->
+
+
+    <script>
+        function myFunction() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("recherche");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("recherchetable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[0];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+    <script>
+        $(document).ready(function() {
+            Socialite.load();
+        });
+    </script>
+
+
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    Liste de circuits
+                </h3>
+                <br>
+                <br>
+                <div class="card-tools">
+                    <div class="input-group input-group-sm" style="width: 250px;">
+
+
+                                 <button type="submit" class="btn btn-default"><i class="fa fa-search" aria-hidden="true"></i>
+                                     <input type="text" name="table_search"  id="recherche" onkeyup="myFunction()" class="form-control float-right" placeholder="Tapez nom Circuit ...">
+                                 </button>
+
+
+                            <br>
+                            <br>
+
+                    </div>
+                </div>
+            </div>
+
+
+                <!-- /.card-header -->
+                <div class="card-body table-responsive p-0" data-bgColor="red">
+                    <table id="recherchetable" class="table table-bordered table-striped" border="2" bgcolor="#8b0000">
+                        <thead>
+                        <tr>
+
+
+                            <th>Nom</th>
+                            <th>Depart</th>
+                            <th>Pause</th>
+                            <th>End</th>
+                            <th>Difficulty</th>
+                            <th>Distance</th>
+
+
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for i in circuits %}
+                            <tr>
+                                <td>{{ i.nom}}</td>
+                                <td>{{ i.depart.nom}}</td>
+                                <td>{{ i.pause.nom}}</td>
+                                <td>{{ i.end.nom}}</td>
+                                <td>{{ i.difficulty}}</td>
+                                <td>{{ i.distance}}</td>
+                                <td><a href="{{ path('update_circuit',{'id':i.id}) }}">
+                                        <button type="button" class="btn btn-primary">
+                                            <i class="fa fa-refresh" aria-hidden="true"></i>
+                                            Modifier
+                                        </button></a></td>
+                                <td><a href="{{ path('circuit_delete',{'id':i.id}) }}">
+                                        <button type="button" class="btn btn-danger" >
+                                            <i class="fa fa-trash" aria-hidden="true"></i>   Supprimer une ligne
+                                        </button></a>
+                                </td>
+
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                        <tfoot>
+                        <tr>
+
+
+                        </tr>
+
+                        </tfoot>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+
+            </div>
+            <!-- /.card -->
+
+        </div>
+{% endblock %}

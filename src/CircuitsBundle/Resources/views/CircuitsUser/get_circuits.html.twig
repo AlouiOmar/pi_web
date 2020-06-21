@@ -1,0 +1,178 @@
+{% extends 'basez2.html.twig' %}
+{% block content %}
+
+
+    <script type="text/javascript" src="{{ asset('vendor/js/socialite.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('vendor/js/socialite.min.js') }}"></script>
+    <!--...-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+        function recherch() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("recherche");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("recherchetable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[0];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+    <script>
+        $(document).ready(function() {
+            Socialite.load();
+        });
+    </script>
+
+    <br>
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    Liste de circuits
+                </h3>
+                <br>
+                <br>
+
+    <div class="circuit-item-filter row">
+
+        <div class="col-12 col-sm-8 text-center text-sm-left">
+
+            <span> <b> <font size="4" >Filtrer par : </font> </b></span>
+
+            <br>
+            <select id="distancehigh" onchange="price()" class="selectpicker" >
+
+                <option value="1">Tous les Circuits</option>
+                <option value="2">High Dist → Low Dist</option>
+                <option value="3" >Low Dist → High Dist</option>
+
+            </select>
+
+        </div>
+
+
+
+
+
+                <div class="card-tools">
+                    <div class="input-group input-group-sm" style="width: 250px;">
+
+
+                                 <button type="submit" class="btn btn-default"><i class="fa fa-search" aria-hidden="true"></i>
+                                     <input type="text" name="table_search"  id="recherche" onkeyup="recherch()" class="form-control float-right" placeholder="Tapez nom Circuit ...">
+                                 </button>
+
+
+                            <br>
+                            <br>
+
+                    </div>
+                </div>
+            </div>
+
+
+                <!-- /.card-header -->
+                <div class="card-body table-responsive p-0" data-bgColor="red">
+                    <table id="recherchetable" class="table table-bordered table-striped" border="2" bgcolor="#D3D3D3">
+                        <thead>
+                        <tr>
+
+
+                            <th>Nom</th>
+                            <th>Depart</th>
+                            <th>Pause</th>
+                            <th>End</th>
+                            <th>Difficulty</th>
+                            <th>Distance</th>
+
+
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for i in circuits %}
+                            <tr>
+                                <td><a href="{{ path('circuit_single',{'id':i.id}) }}">{{ i.nom}}</a></td>
+                                <td>{{ i.depart.nom}}</td>
+                                <td>{{ i.pause.nom}}</td>
+                                <td>{{ i.end.nom}}</td>
+                                <td>{{ i.difficulty}}</td>
+                                <td>{{ i.distance}}</td>
+                                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                {% if app.user.id ==i.userid.id %}
+
+                                <td><a href="{{ path('update_circuitU',{'id':i.id}) }}">
+                                        <button type="button" class="btn btn-primary">
+                                            <i class="fa fa-refresh" aria-hidden="true"></i>
+                                            Modifier
+                                        </button></a></td>
+                                <td><a href="{{ path('circuit_deleteU',{'id':i.id}) }}" onclick="return confirm('etes vous sure!!')">
+                                        <button type="button" class="btn btn-danger" >
+                                            <i class="fa fa-trash" aria-hidden="true"></i>   Supprimer une ligne
+                                        </button></a>
+                                </td>
+                                {% endif %}
+                                {% endif %}
+
+
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                        <tfoot>
+                        <tr>
+
+
+                        </tr>
+
+                        </tfoot>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+
+            </div>
+            <!-- /.card -->
+    </div>
+        </div>
+    <script>
+        function price() {
+            var selected = document.getElementById('distancehigh').options[document.getElementById('distancehigh').selectedIndex];
+            console.log(selected.value);
+            if(selected.value == 1) {
+                window.location.replace("{{ path('get_circuitsU') }}");
+            }
+            if(selected.value == 2) {
+                window.location.replace("{{ path('showHighDist') }}");
+            }
+            else if (selected.value == 3) {
+                window.location.replace("{{ path('showLowDist') }}");
+            }else {
+                window.location.replace("{{ path('get_circuitsU') }}");
+            }
+
+        }
+    </script>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+
+<div class="text-center" ><h1> Liste des reservations </h1> <br/>
+    <br>
+
+    <table class="table_striped">
+        <thead>
+        <tr>
+            <th>Titre</th>
+            <th>Date debut</th>
+            <th>Date fin</th>
+            <th>Location</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for reservation in reservations %}
+        <tr>
+            <td>{{ reservation.titre }}</td>
+            <td>{% if reservation.dateDeb %}{{ reservation.dateDeb|date('Y-m-d') }}{% endif %}</td>
+            <td>{% if reservation.dateFin %}{{ reservation.dateFin|date('Y-m-d') }}{% endif %}</td>
+
+            <td></td>
+
+ 
+            {% if is_granted ('ROLE_LOCATAIRE') %}
+            <td>
+            <a href="{{ path('reservation_accept', { 'id': reservation.id }) }}" class="btn btn-success btn-sm"> Accepter </a>
+            <a href="{{ path('reservation_delete', { 'id': reservation.id }) }}" class="btn btn-danger btn-sm"> Refuser </a>
+            </td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <br><br><br>
+
+    {% endblock %}

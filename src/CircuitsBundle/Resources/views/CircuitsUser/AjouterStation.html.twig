@@ -1,0 +1,41 @@
+{% extends 'basez2.html.twig' %}
+
+{% block content %}
+
+
+    {{ form_start(form)}}
+    <div class="container">
+        <h1>Ajouter une Station</h1>
+
+
+        <div class="form-group">
+            {{ form_label(form.nom, 'Nom')}}
+            {{ form_widget(form.nom,{'attr':{'class':'form-control'}})}}
+            {{ form_errors(form.nom)}}
+
+        </div>
+        <div class="form-group">
+            {{ form_label(form.lattitude, 'lattitude' )}} <br>
+            {{ form_widget(form.lattitude,{'attr':{'class':'form-control'}})}}
+            {{ form_errors(form.lattitude)}}
+
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.longitude, 'Longitude' )}}
+            {{ form_widget(form.longitude,{'attr':{'class':'form-control'}})}}
+            {{ form_errors(form.longitude)}}
+
+        </div>
+
+
+
+
+
+
+        <div class="col-md-12 form-group p_star"> {{ form_row(form.Save)}}</div>
+
+    </div>
+    {{ form_end(form)}}
+
+{% endblock %}

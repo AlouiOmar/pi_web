@@ -48,3 +48,6 @@ services:
             $formFactory: '@fos_user.registration.form.factory'
 #    app.form.profile:
 #        class: AppBundle\Form\ProfileType
+
+    redirect.after.login:
+        class: RentBundle\Redirection\AfterLoginRedirection

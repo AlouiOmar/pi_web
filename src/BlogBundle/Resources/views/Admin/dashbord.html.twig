@@ -81,43 +81,39 @@
 
     <header class="main-header">
         <!-- Logo -->
-        <a href="{{ path('admin') }}"  class="logo">
+        <a href="#" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>A</b>LT</span>
             <!-- logo for regular state and mobile devices -->
-            <span href="{{ path('admin') }}" class="logo-lg"> Admin</span>
+            <span class="logo-lg"><b>Admin</b>LTE</span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top">
             <!-- Sidebar toggle button-->
             <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
                 <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
             </a>
 
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
 
-
-
-
                     <!-- User Account: style can be found in dropdown.less -->
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-
-                            <span class="hidden-xs">{{ app.user.username }}</span>
+                            <img src="{{ asset(app.user.photo) }}" class="user-image" alt="User Image">
+                            <span class="hidden-xs">{{ app.user.nom|capitalize~' '~app.user.prenom|capitalize }}</span>
                         </a>
-
-                         <div >
-                                    <a  class="btn btn-default btn-flat">Sign out</a>
-                                </div>
                         <ul class="dropdown-menu">
                             <!-- User image -->
                             <li class="user-header">
-                                <img src="{{asset('admin/dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
+                                <img src="{{ asset(app.user.photo) }}" class="img-circle" alt="User Image">
 
                                 <p>
-                                    Alexander Pierce - Web Developer
-                                    <small>Member since Nov. 2012</small>
+                                    {{ app.user.nom|capitalize~' '~app.user.prenom|capitalize }} - Administrateur
+                                    <small>Dernière Connection:  {{ app.user.lastLogin|date('d/m/Y') }}</small>
                                 </p>
                             </li>
                             <!-- Menu Body -->
@@ -125,69 +121,278 @@
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                    <a href="{{ path('velo_admin_profile_user',{"id":app.user.id}) }}" class="btn btn-default btn-flat">Profile</a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                    <a href="{{ path('fos_user_security_logout') }}" class="btn btn-default btn-flat">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a>
                                 </div>
                             </li>
                         </ul>
                     </li>
                     <!-- Control Sidebar Toggle Button -->
-
+                    <li>
+                        <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+                    </li>
                 </ul>
             </div>
         </nav>
     </header>
+    {#<header class="main-header">#}
+        {#<!-- Logo -->#}
+        {#<a href="{{ path('admin') }}"  class="logo">#}
+            {#<!-- mini logo for sidebar mini 50x50 pixels -->#}
+            {#<span class="logo-mini"><b>A</b>LT</span>#}
+            {#<!-- logo for regular state and mobile devices -->#}
+            {#<span href="{{ path('admin') }}" class="logo-lg"> Admin</span>#}
+        {#</a>#}
+        {#<!-- Header Navbar: style can be found in header.less -->#}
+        {#<nav class="navbar navbar-static-top">#}
+            {#<!-- Sidebar toggle button-->#}
+            {#<a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">#}
+                {#<span class="sr-only">Toggle navigation</span>#}
+            {#</a>#}
+
+            {#<div class="navbar-custom-menu">#}
+                {#<ul class="nav navbar-nav">#}
+
+
+
+
+                    {#<!-- User Account: style can be found in dropdown.less -->#}
+                    {#<li class="dropdown user user-menu">#}
+                        {#<a href="#" class="dropdown-toggle" data-toggle="dropdown">#}
+
+                            {#<span class="hidden-xs">{{ app.user.username }}</span>#}
+                        {#</a>#}
+
+                         {#<div >#}
+                                    {#<a  class="btn btn-default btn-flat">Sign out</a>#}
+                                {#</div>#}
+                        {#<ul class="dropdown-menu">#}
+                            {#<!-- User image -->#}
+                            {#<li class="user-header">#}
+                                {#<img src="{{asset('admin/dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">#}
+
+                                {#<p>#}
+                                    {#Alexander Pierce - Web Developer#}
+                                    {#<small>Member since Nov. 2012</small>#}
+                                {#</p>#}
+                            {#</li>#}
+                            {#<!-- Menu Body -->#}
+
+                            {#<!-- Menu Footer-->#}
+                            {#<li class="user-footer">#}
+                                {#<div class="pull-left">#}
+                                    {#<a href="#" class="btn btn-default btn-flat">Profile</a>#}
+                                {#</div>#}
+                                {#<div class="pull-right">#}
+                                    {#<a href="#" class="btn btn-default btn-flat">Sign out</a>#}
+                                {#</div>#}
+                            {#</li>#}
+                        {#</ul>#}
+                    {#</li>#}
+                    {#<!-- Control Sidebar Toggle Button -->#}
+
+                {#</ul>#}
+            {#</div>#}
+        {#</nav>#}
+    {#</header>#}
     {% endblock %}
 
     {% block banner %}
     <!-- Left side column. contains the logo and sidebar -->
-    <aside class="main-sidebar">
-        <!-- sidebar: style can be found in sidebar.less -->
-<section class="sidebar">
-            <!-- Sidebar user panel -->
-            <div class="user-panel">
-                <div class="pull-left image">
-                    <img src="{{ asset(app.user.photo) }}" class="img-circle" alt="User Image">
+        <aside class="main-sidebar">
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar">
+                <!-- Sidebar user panel -->
+                <div class="user-panel">
+                    <div class="pull-left image">
+                        <img src="{{ asset(app.user.photo) }}" class="img-circle" alt="User Image" style="height: 35px;width: 35px">
+                    </div>
+                    <div class="pull-left info">
+                        <p>{{ app.user.nom|capitalize~' '~app.user.prenom|capitalize }}</p>
+                    </div>
                 </div>
-                <div class="pull-left info">
-                    <p>{{ app.user.username }}</p>
-                    <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-                </div>
-            </div>
-            <!-- search form -->
-            <form action="#" method="get" class="sidebar-form">
-                <div class="input-group">
-                    <input type="text" name="q" class="form-control" placeholder="Search...">
-                    <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                </button>
-              </span>
-                </div>
-            </form>
 
+                <!-- sidebar menu: : style can be found in sidebar.less -->
+                <ul class="sidebar-menu" data-widget="tree">
+                    <li class="header">MAIN NAVIGATION</li>
+                    <li {% block user %}class="treeview"{% endblock user %}>
+                        <a href="#">
+                            <i class="fa fa-user"></i> <span>Utilisateur</span>
+                            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li {% block adduser %}{% endblock adduser %}><a href="{{ path('velo_admin_add_user') }}"><i class="fa fa-user-plus"></i> Ajouter utilisateur</a></li>
+                            <li {% block listuser %}{% endblock listuser %}><a href="{{ path('velo_admin_list_user') }}"><i class="fa fa-users"></i> Liste des utilisateurs</a></li>
+                        </ul>
+                    </li>
 
-            <!-- /.search form -->
-    <ul class="sidebar-menu" data-widget="tree">
-                <li class="header">MAIN NAVIGATION</li>
+                    <li>
 
-       <li class="active  treeview">
-                    <a href="#">
-                        <i class="fa fa-dashboard"></i> <span>Blog</span>
-                        <span class="pull-right-container">
+                    <li {% block annonce %} class="treeview" {% endblock annonce %}>
+                        <a href="#">
+                            <i class="fa fa-file-text-o"></i>
+                            <span>Annonce</span>
+                            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li {% block ajoutannonce %}{% endblock ajoutannonce %}><a href="{{ path('velo_admin_add_annonce') }}"><i class="fa fa-plus"></i> Ajouter annonce</a></li>
+                            <li {% block listeannonce %}{% endblock listeannonce %}><a href="{{ path('velo_admin_list_annonce') }}"><i class="fa fa-list"></i> Liste des annonces</a></li>
+                            <li {% block listeannoncesignalee %}{% endblock listeannoncesignalee %}><a href="{{ path('velo_admin_signaled_annonce') }}"><i class="fa fa-warning"></i> Les annonces signalées</a></li>
+                            <li {% block stat %}{% endblock stat %}><a href="{{ path('velo_admin_stat_annonce') }}"><i class="fa fa-pie-chart"></i> Statistique</a></li>
+
+                        </ul>
+                    <li class=" treeview active">
+                        <a href="#">
+                            <i class="fa fa-dashboard"></i> <span>Blog</span>
+                            <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
                  </span>
-                    </a>
-                    <ul class          = "treeview-menu">
-                        <li class      = "active"><a href                          = "{{ path('adminlistpost') }}"><i class = "fa fa-circle-o"></i> List Post</a></li>
-                        <li><a  href   = "{{ path('adminlistcomment') }}"><i class = "fa fa-circle-o"></i> List Comment</a></li>
-                        <li><a  href = "{{ path('statistique') }}"><i class      = "fa fa-circle-o"></i> statistique</a></li>
-                    </ul>
-        </li>
+                        </a>
+                        <ul class          = "treeview-menu">
+                            <li class      = ""><a href                          = "{{ path('adminlistpost') }}"><i class = "fa fa-circle-o"></i> List Post</a></li>
+                            <li><a  href   = "{{ path('adminlistcomment') }}"><i class = "fa fa-circle-o"></i> List Comment</a></li>
+                            <li><a  href = "{{ path('statistique') }}"><i class      = "fa fa-circle-o"></i> statistique</a></li>
+                        </ul>
+                    </li>
+                    </li>
 
-  
-                   
+                    <li class=" treeview active">
+                        <a href="#">
+                            <i class="fa fa-dashboard"></i> <span> Gestion Circuits</span>
+                            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="{{ path('createc') }}"><i class="fa fa-circle-o"></i> Ajouter </a></li>
+                            <li class=""><a href="{{ path('get_circuits') }}"><i class="fa fa-circle-o"></i> Afficher </a></li>
+
+                        </ul>
+                    </li>
+                    <li class=" treeview ">
+                        <a href="#">
+                            <i class="fa fa-dashboard"></i> <span> Gestion Stations</span>
+                            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="{{ path('creates') }}"><i class="fa fa-circle-o"></i> Ajouter </a></li>
+                            <li class=""><a href="{{ path('get_stations') }}"><i class="fa fa-circle-o"></i> Afficher </a></li>
+
+                        </ul>
+                    </li>
+                    <li class=" treeview">
+                        <a href="#">
+                            <i class="fa fa-dashboard"></i> <span>Evenement</span>
+                            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li class=""><a href="{{  path('show_dash')}}" ><i class="fa fa-circle-o"></i> List evenement</a></li>
+                            <li><a href="index2.html"><a href="{{  path('add_dash')}}"><i class="fa fa-circle-o"></i> ajouter evenement</a></li>
+                        </ul>
+                    </li>
+                    <li class=" treeview ">
+                        <a href="#">
+                            <i class="fa fa-dashboard"></i> <span> Gestion Produit</span>
+                            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="{{ path('create') }}"><i class="fa fa-circle-o"></i> Ajouter Produit</a></li>
+                            <li class=""><a href="{{ path('showProd') }}"><i class="fa fa-circle-o"></i> Afficher Produit</a></li>
+                            <li class=""><a href="{{ path('showHistoryProd') }}"><i class="fa fa-circle-o"></i> Historique Produit</a></li>
+                        </ul>
+                    </li>
+
+
+                    <li class=" treeview ">
+                        <a href="#">
+                            <i class="fa fa-dashboard"></i> <span> Gestion Types </span>
+                            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li class=""><a href="{{ path('createCateg') }}"><i class="fa fa-circle-o"></i> Ajouter un Type </a></li>
+                            <li class=""><a href="{{ path('showCategProd') }}"><i class="fa fa-circle-o"></i> Afficher un Type</a></li>
+                        </ul>
+                    </li>
+
+                    <li class=" treeview ">
+                        <a href="#">
+                            <i class="fa fa-dashboard"></i> <span> Gestion Location </span>
+                            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="{{ path('location_homepage') }}"><i class="fa fa-folder"></i> <span>Location</span> </a>
+                            <li><a href="{{ path('reservation_calendar') }}"><i class="fa fa-calendar"></i> <span>Reservation</span>
+                                </a>  </ul>
+                    </li>
+                </ul>
+
+
+
+
+            </section>
+            <!-- /.sidebar -->
+        </aside>
+    {#<aside class="main-sidebar">#}
+        {#<!-- sidebar: style can be found in sidebar.less -->#}
+{#<section class="sidebar">#}
+            {#<!-- Sidebar user panel -->#}
+            {#<div class="user-panel">#}
+                {#<div class="pull-left image">#}
+                    {#<img src="{{ asset(app.user.photo) }}" class="img-circle" alt="User Image">#}
+                {#</div>#}
+                {#<div class="pull-left info">#}
+                    {#<p>{{ app.user.username }}</p>#}
+                    {#<a href="#"><i class="fa fa-circle text-success"></i> Online</a>#}
+                {#</div>#}
+            {#</div>#}
+            {#<!-- search form -->#}
+            {#<form action="#" method="get" class="sidebar-form">#}
+                {#<div class="input-group">#}
+                    {#<input type="text" name="q" class="form-control" placeholder="Search...">#}
+                    {#<span class="input-group-btn">#}
+                {#<button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>#}
+                {#</button>#}
+              {#</span>#}
+                {#</div>#}
+            {#</form>#}
+
+
+            {#<!-- /.search form -->#}
+    {#<ul class="sidebar-menu" data-widget="tree">#}
+                {#<li class="header">MAIN NAVIGATION</li>#}
+
+       {#<li class="active  treeview">#}
+                    {#<a href="#">#}
+                        {#<i class="fa fa-dashboard"></i> <span>Blog</span>#}
+                        {#<span class="pull-right-container">#}
+              {#<i class="fa fa-angle-left pull-right"></i>#}
+                 {#</span>#}
+                    {#</a>#}
+                    {#<ul class          = "treeview-menu">#}
+                        {#<li class      = "active"><a href                          = "{{ path('adminlistpost') }}"><i class = "fa fa-circle-o"></i> List Post</a></li>#}
+                        {#<li><a  href   = "{{ path('adminlistcomment') }}"><i class = "fa fa-circle-o"></i> List Comment</a></li>#}
+                        {#<li><a  href = "{{ path('statistique') }}"><i class      = "fa fa-circle-o"></i> statistique</a></li>#}
+                    {#</ul>#}
+        {#</li>#}
+
+  {##}
+                   {##}
 
         {#<li class="active treeview">#}
                     {#<a href="#">#}
@@ -200,13 +405,13 @@
                         {#<li class="active"><a href="{{ path('adminlistfosuser') }}"><i class="fa fa-circle-o"></i> List fos_user</a></li>#}
                     {#</ul>#}
         {#</li>#}
-    
-    </ul>
+    {##}
+    {#</ul>#}
 
 
-</section>
-        <!-- /.sidebar -->
-    </aside>
+{#</section>#}
+        {#<!-- /.sidebar -->#}
+    {#</aside>#}
 {% endblock %}
     {% block content %}
     <!-- Content Wrapper. Contains page content -->

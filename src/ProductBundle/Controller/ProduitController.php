@@ -215,7 +215,8 @@ class ProduitController extends Controller
             $request->query->getInt('limit', 5)
 
         );
-
+//        dump($resultt);
+//        die();
         return $this->render('@Product/Client/afficheProduit.html.twig', array('produits' => $resultt));
 
     }

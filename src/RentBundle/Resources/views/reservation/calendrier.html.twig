@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}Velo.Tn{% endblock %}</title>
+    <link rel="icon" href="img/favicon.png">
+
+    {% block stylesheets %}
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="{{  asset('css/bootstrap.min.css')}}">
+        <!-- animate CSS -->
+        <link rel="stylesheet" href="{{  asset('css/animate.css')}}">
+        <!-- owl carousel CSS -->
+        <link rel="stylesheet" href="{{asset('css/owl.carousel.min.css')}}">
+        <!-- font awesome CSS -->
+        <link rel="stylesheet" href="{{asset('css/all.css')}}">
+        <!-- flaticon CSS -->
+        <link rel="stylesheet" href="{{asset('css/flaticon.css')}}">
+        <link rel="stylesheet" href="{{asset('css/themify-icons.css')}}">
+        <!-- font awesome CSS -->
+        <link rel="stylesheet" href="{{asset('css/magnific-popup.css')}}">
+        <!-- swiper CSS -->
+        <link rel="stylesheet" href="{{asset('css/slick.css')}}">
+        <!-- style CSS -->
+        <link rel="stylesheet" href="{{asset('css/style.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/rating.css') }}" />
+
+
+        <link href='https://use.fontawesome.com/releases/v5.0.6/css/all.css' rel='stylesheet'>
+        <link rel='stylesheet' href="{{  asset('packages/core/main.css') }}">
+        <link rel='stylesheet' href="{{  asset('packages/bootstrap/main.css') }}">
+        <link rel='stylesheet' href="{{  asset('packages/timegrid/main.css') }}">
+        <link rel='stylesheet' href="{{  asset('packages/daygrid/main.css') }}">
+        <link rel='stylesheet' href="{{  asset('packages/list/main.css' ) }}">
+    {% endblock %}
+</head>
+
+
+<body>
+<!--::header part start::-->
+<header class="main_menu home_menu">
+    <div class="container-fluid">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-lg-11">
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <a class="navbar-brand" href="/"> <img src="{{ asset ('img/logo.png') }}img/logo.png" alt="logo"> </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="menu_icon"><i class="fas fa-bars"></i></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse main-menu-item" id="navbarSupportedContent">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/">Home</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_1"
+                                   role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Annonces
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
+                                    <a class="dropdown-item" href="category.html"> Achat</a>
+                                    <a class="dropdown-item" href="single-product.html">Vente</a>
+
+                                </div>
+                            </li>
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_1"
+                                   role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Produit
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
+                                    <a class="dropdown-item" href="category.html"> Velo</a>
+                                    <a class="dropdown-item" href="single-product.html">Piece de rechange</a>
+                                    <a class="dropdown-item" href="single-product.html">Accessoires</a>
+
+                                </div>
+                            </li>
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_1"
+                                   role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Circuit
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
+                                    <a class="dropdown-item" href="category.html"> Add</a>
+                                    <a class="dropdown-item" href="single-product.html">Vente</a>
+
+                                </div>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_3"
+                                   role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Event
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
+                                    <a class="dropdown-item" href="/login">
+                                        login
+
+                                    </a>
+                                    <a class="dropdown-item" href="tracking.html">tracking</a>
+                                    <a class="dropdown-item" href="checkout.html">product checkout</a>
+                                    <a class="dropdown-item" href="cart.html">shopping cart</a>
+                                    <a class="dropdown-item" href="confirmation.html">confirmation</a>
+                                    <a class="dropdown-item" href="elements.html">elements</a>
+                                </div>
+                            </li>
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_2"
+                                   role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    blog
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
+                                    <a class="dropdown-item" href="blog.html"> blog</a>
+                                    <a class="dropdown-item" href="single-blog.html">Single blog</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_1"
+                                   role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Location
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
+                                    <a class="dropdown-item" href="{{ path('location_new') }}"> Louer</a>
+                                    <a class="dropdown-item" href="{{ path('location_homepage') }}">Reserver</a>
+
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/contact">Contact</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <li class="nav-item dropdown">
+                        <a class="far fa-user"  id="navbarDropdown_1"
+                           role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" > </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
+
+                            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                                <a class="dropdown-item" href="/profile"> Profile</a>
+
+                                <a class="dropdown-item" href="{{ path('fos_user_security_logout') }}">Deconexion</a>
+
+                            {% else %}
+                                <a class="dropdown-item" id="login" id="login" href="{{ path ('fos_user_security_login') }}"> log in</a>
+                            {% endif %}
+
+                        </div>
+                    </li>
+
+
+
+                    <a id="search_1" href="javascript:void(0)"><i class="ti-search"></i></a>
+            </div>
+            </nav>
+        </div>
+    </div>
+    </div>
+    <div class="search_input" id="search_input_box">
+        <div class="container ">
+            <form class="d-flex justify-content-between search-inner">
+                <input type="text" class="form-control" id="search_input" placeholder="Search Here">
+                <button type="submit" class="btn">Valider </button>
+                <a href="{{ path('location_search') }}" class="btn btn-info" role="button">Recherche</a>
+                <span class="ti-close" id="close_search" title="Close Search"></span>
+            </form>
+        </div>
+    </div>
+</header>
+<!-- Header part end-->
+
+    {% block body %}
+
+    {% block javascripts %}
+        <!-- jquery plugins here-->
+        <script src="{{ asset('js/jquery-1.12.1.min.js') }}"></script>
+        <!-- popper js -->
+        <script src="{{ asset('js/popper.min.js') }}"></script>
+        <!-- bootstrap js -->
+        <script src="{{asset('js/bootstrap.min.js')}}"></script>
+        <!-- easing js -->
+        <script src="{{ asset('js/jquery.magnific-popup.js') }}"></script>
+        <!-- swiper js -->
+        <script src="{{asset('js/swiper.min.js')}}"></script>
+        <!-- swiper js -->
+        <script src="{{asset('js/mixitup.min.js') }}"></script>
+        <!-- particles js -->
+        <script src="{{asset('js/owl.carousel.min.js')}}"></script>
+        <script src="{{asset('js/jquery.nice-select.min.js')}}"></script>
+        <!-- slick js -->
+        <script src="{{asset('js/slick.min.js')}}"></script>
+        <script src="{{asset('js/jquery.counterup.min.js')}}"></script>
+        <script src="{{asset('js/waypoints.min.js')}}"></script>
+        <script src="{{asset('js/contact.js')}}"></script>
+        <script src="{{asset('js/jquery.ajaxchimp.min.js')}}"></script>
+        <script src="{{asset('js/jquery.form.js') }}"></script>
+        <script src="{{asset('js/jquery.validate.min.js')}}"></script>
+        <script src="{{asset('js/mail-script.js')}}"></script>
+        <!-- custom js -->
+        <script src="{{asset('js/custom.js')}}"></script>
+        <script src="{{asset('js/stellar.js')}}"></script>
+        <script src="{{asset('js/price_rangs.js')}}"></script>
+        <!-- make sure that jquery is included -->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+        <script src="{{ asset('front/js/rating.js') }}"></script>
+        <!-- custom js -->
+        <script src="{{asset('front/js/custom.js')}}"></script>
+
+
+
+
+        <script src="{{  asset('packages/core/main.js' ) }}"></script>
+    <script src="{{  asset('packages/interaction/main.js' ) }}"></script>
+    <script src="{{  asset('packages/bootstrap/main.js') }}" ></script>
+    <script src="{{  asset('packages/daygrid/main.js') }}" ></script>
+    <script src="{{  asset('packages/timegrid/main.js' ) }}"></script>
+    <script src="{{  asset('packages/list/main.js' ) }}" ></script>
+    <script src="{{  asset('js/theme-chooser.js' ) }}" ></script>
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+            var calendar;
+
+            initThemeChooser({
+
+                init: function(themeSystem) {
+                    calendar = new FullCalendar.Calendar(calendarEl, {
+                        plugins: [ 'bootstrap', 'interaction', 'dayGrid', 'timeGrid', 'list' ],
+                        themeSystem: themeSystem,
+                        header: {
+                            left: 'prev,next today',
+                            center: 'title',
+                            right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+                        },
+                        defaultDate: '2020-05-26',
+                        weekNumbers: true,
+                        navLinks: true, // can click day/week names to navigate views
+                        editable: true,
+                        eventLimit: true, // allow "more" link when too many events
+                        events: [
+                            {
+                                title: 'Green byke',
+                                url: "/rent/showReserv15",
+                                start: '2020-03-27',
+                                end: '2020-03-28'
+                            },
+                            {
+                                title: 'A louer',
+                                url: "/rent/showReserv17",
+                                start: '2020-02-28',
+                                end: '2020-03-08'
+                            },
+                            {
+                                title: 'Velo montagne',
+                                url: "/rent/showReserv18",
+                                start: '2020-02-07',
+                                end: '2020-03-08'
+                            },
+                            {
+                                title: 'byke for rent',
+                                url: "/rent/showReserv19",
+                                start: '2020-02-12T10:30:00',
+                                end: '2020-02-12T12:30:00'
+                            },
+                            {
+                                title: 'a louer',
+                                url: "/rent/showReserv20",
+                                start: '2020-02-18',
+                                end: '2020-02-20'
+                            },
+                            {
+                                title: 'rent',
+                                url: '/rent/showReserv21',
+                                start: '2020-02-18',
+                                end: '2020-02-20'
+                            },
+                            {
+                                title: 'byk montagne',
+                                url: '/rent/showReserv22',
+                                start: '2020-05-01',
+                                end: '2020-05-11'
+                            },
+                            {
+                                title: 'vélo pour montagne',
+                                url: '/rent/showReserv23',
+                                start: '2020-05-01',
+                                end: '2020-05-11'
+                            },
+                            {
+                                title: 'a ne pas rater',
+                                url: '/rent/showReserv29',
+                                start: '2020-10-18',
+                                end: '2020-10-21'
+                            },
+                            {
+                                title: 'vélo pour enfants',
+                                url: '/rent/showReserv38',
+                                start: '2020-08-15',
+                                end: '2020-08-17'
+                            }
+                        ]
+                    });
+                    calendar.render();
+                },
+
+                change: function(themeSystem) {
+                    calendar.setOption('themeSystem', themeSystem);
+                }
+
+            });
+
+        });
+
+    </script>
+    {% endblock %}
+    <style>
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+        }
+
+        #top,
+        #calendar.fc-unthemed {
+            font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+        }
+
+        #top {
+            background: #eee;
+            border-bottom: 1px solid #ddd;
+            padding: 0 10px;
+            line-height: 40px;
+            font-size: 12px;
+            color: #000;
+        }
+
+        #top .selector {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        #top select {
+            font: inherit; /* mock what Boostrap does, don't compete  */
+        }
+
+        .left { float: left }
+        .right { float: right }
+        .clear { clear: both }
+
+        #calendar {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 10px;
+        }
+
+    </style>
+</head>
+<body>
+
+<div id='top'>
+
+    <div class='left'>
+
+        <div id='theme-system-selector' class='selector'>
+            Theme System:
+
+            <select>
+                <option value='bootstrap' selected>Bootstrap 4</option>
+                <option value='standard'>unthemed</option>
+            </select>
+        </div>
+
+        <div data-theme-system="bootstrap" class='selector' style='display:none'>
+            Theme Name:
+
+            <select>
+                <option value='' selected>Default</option>
+                <option value='cerulean'>Cerulean</option>
+                <option value='cosmo'>Cosmo</option>
+                <option value='cyborg'>Cyborg</option>
+                <option value='darkly'>Darkly</option>
+                <option value='flatly'>Flatly</option>
+                <option value='journal'>Journal</option>
+                <option value='litera'>Litera</option>
+                <option value='lumen'>Lumen</option>
+                <option value='lux'>Lux</option>
+                <option value='materia'>Materia</option>
+                <option value='minty'>Minty</option>
+                <option value='pulse'>Pulse</option>
+                <option value='sandstone'>Sandstone</option>
+                <option value='simplex'>Simplex</option>
+                <option value='sketchy'>Sketchy</option>
+                <option value='slate'>Slate</option>
+                <option value='solar'>Solar</option>
+                <option value='spacelab'>Spacelab</option>
+                <option value='superhero'>Superhero</option>
+                <option value='united'>United</option>
+                <option value='yeti'>Yeti</option>
+            </select>
+        </div>
+
+        <span id='loading' style='display:none'>loading theme...</span>
+
+    </div>
+
+    <div class='right'>
+      <span class='credits' data-credit-id='bootstrap-standard' style='display:none'>
+        <a href='https://getbootstrap.com/docs/3.3/' target='_blank'>Theme by Bootstrap</a>
+      </span>
+        <span class='credits' data-credit-id='bootstrap-custom' style='display:none'>
+        <a href='https://bootswatch.com/' target='_blank'>Theme by Bootswatch</a>
+      </span>
+    </div>
+
+    <div class='clear'></div>
+</div>
+
+<div id='calendar'></div>
+
+{% endblock %}
+
+
+</body>
+</html>

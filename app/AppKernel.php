@@ -32,6 +32,11 @@ class AppKernel extends Kernel
             new PianoSolo\WeatherBundle\PianoSoloWeatherBundle(),
 //            new Dwr\OpenWeatherBundle\DwrOpenWeatherBundle(),
             new EspritBundle\EspritBundle(),
+            new EspritApiBundle\EspritApiBundle(),
+            new CircuitsBundle\CircuitsBundle(),
+            new RentBundle\RentBundle(),
+            new ADesigns\CalendarBundle\ADesignsCalendarBundle(),
+            new Mobile\MobileAPIBundle\MobileAPIBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

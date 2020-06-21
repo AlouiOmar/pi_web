@@ -1,0 +1,43 @@
+{% extends 'basen1.html.twig' %}
+
+
+{% block body %}
+
+<!-- Page Content -->
+    <div class="container">
+        <br>     <br>
+          <div class="text-center" ><h1> Affichage location  </h1> <br/> </div>
+            <br>
+
+              <a href="{{ path('location_show',{'id':location.id}) }}"</a>
+        
+            <img class="card-img-top img-fluid" src="{{ asset(location.photo) }}" alt="" style="width:12.5em">
+          <div class="card-body">
+              <h3 class="card-title">{{ location.titre }}</h3>
+              <h4>{{ location.prix }}DT</h4>
+              <h4>{{ location.dateCreation |date('Y-m-d')}}</h4>
+            <div>
+                <br><br>
+              <TR>
+              {% if is_granted ('ROLE_CLIENT') %}  <!--client-->
+                <td>    
+                  <a href="{{ path('reservation_new') }}" class="btn btn-primary btn-sm">Reserver</a>
+                </td>
+                {% elseif is_granted ('ROLE_LOCATAIRE') %}
+                <td>
+                  <a href="{{ path('location_edit', { 'id': location.id }) }} " class="btn btn-outline-warning btn-sm"> Modifier </a>
+                </td>
+                 <td> <a href="{{ path('location_delete', { 'id': location.id }) }} " class="btn btn-outline-danger btn-sm"> Supprimer </a></td>
+                {% elseif is_granted (' ROLE_SUPER_ADMIN') %}
+                    <a href="{{ path('location_delete', { 'id': location.id }) }} " class="btn btn-outline-danger btn-sm"> Supprimer </a>
+              {% endif %}
+              </TR>
+            </div>
+          </div>
+          <!-- /.card -->
+
+      </div>
+    </div>
+    <!-- /.container -->
+      <br>   <br>   <br> 
+{% endblock %}

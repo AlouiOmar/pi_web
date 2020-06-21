@@ -1,0 +1,64 @@
+{% extends 'basez2.html.twig' %}
+{% block content %}
+
+<div class="container">
+
+    <h1>Circuit :<em>{{ circuit.nom }}</em></h1>
+
+    <h3>Distance: {{ circuit.distance }}</h3>
+    <h3>Defficulté: {{ circuit.difficulty }}</h3>
+
+    <p>Depart de {{ depart.nom }}, vers {{ pause.nom }}, jusqu'a {{ end.nom }}.</p>
+    {% for comment in comments %}
+        <div class="jumbotron">
+            <h1>{{ comment.userId.nom }}</h1>
+            <p>{{ comment.content }}</p>
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            {% if app.user.id ==comment.userid.id %}
+            <a href="{{ path('delete_comment',{'id':comment.id,'idCircuit':circuit.id}) }}" onclick="return confirm('etes vous sure!!')"><input type="button" class="btn btn-danger" value="supprimer"></a>
+            {% endif %}
+            {% endif %}
+           </div>
+
+    {% endfor %}
+    <div class="comment-form" >
+        <h4> ajouter un commentaire</h4>
+
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <form  action="{{ path('addcomments') }}" class="form-contact comment_form"   method="POST" id="commentForm">
+                <input type="hidden" name="CircuitId" value= "{{ circuit.id }}">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                              <textarea class="form-control w-100" name="comment" id="comment" cols="15" rows="9"
+                                        placeholder="Write Comment"></textarea>
+                        </div>
+                    </div>
+
+
+
+                </div>
+                <div class="form-group mt-3">
+                    <input type="submit" class="btn_3 button-contactForm" value="ajouter un commentaire">
+                </div>
+            </form>
+
+        {% elseif is_granted('IS_AUTHENTICATED_ANONYMOUSLY') %}
+            <br> <br>
+
+            <div class="alert alert-primary" role="alert">
+                vous devez créer un compte avant d'ajouter un commentaire
+                <a href="{{ path('fos_user_registration_register')}}">céer un compte</a>
+                ou bien vous  devez
+                <a href="{{ path('fos_user_security_login')}}" >s'authentifier</a>
+            </div>
+
+        {% endif %}
+
+
+    </div>
+</div>
+
+
+{% endblock %}
+

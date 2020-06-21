@@ -22,11 +22,12 @@
     "require": {
         "php": ">=5.5.9",
         "ext-json": "*",
+        "adesigns/calendar-bundle": "^1.1",
         "blackknight467/star-rating-bundle": "^2.0",
-        "dwr/open-weather": "1.0.0",
         "cmen/google-charts-bundle": "^3.2.1",
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/orm": "^2.5",
+        "dwr/open-weather": "1.0.0",
         "friendsofsymfony/ckeditor-bundle": "^2.2",
         "friendsofsymfony/user-bundle": "~2.0",
         "gregwar/captcha-bundle": "2.0.0",

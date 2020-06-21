@@ -25,31 +25,31 @@ use CMEN\GoogleChartsBundle\GoogleCharts\Charts\PieChart;
 class BlogController extends Controller
 {
 
-    public function homeAction()
-    {
-
-        
-      /*  $admin=new User();
-        $admin->addRole("ROLE_ADMIN");
-        $admin->setEmail("admin@gmail.com");
-        $admin->setUsername("admin");
-        $admin->setPlainPassword("123456");
-        $admin->setEnabled(true);
-        $em=$this->getDoctrine()->getManager();
-        $em->persist($admin);
-        $em->flush();*/
-        return $this->render('@Blog/Default/layout.html.twig');
-    }
-
-    public function loginAction()
-    {
-        return $this->render('@Blog/Default/login.html.twig');
-    }
-
-    public function registerAction()
-    {
-        return $this->render('@Blog/Default/register.html.twig');
-    }
+//    public function homeAction()
+//    {
+//
+//
+//      /*  $admin=new User();
+//        $admin->addRole("ROLE_ADMIN");
+//        $admin->setEmail("admin@gmail.com");
+//        $admin->setUsername("admin");
+//        $admin->setPlainPassword("123456");
+//        $admin->setEnabled(true);
+//        $em=$this->getDoctrine()->getManager();
+//        $em->persist($admin);
+//        $em->flush();*/
+//        return $this->render('@Blog/Default/layout.html.twig');
+//    }
+//
+//    public function loginAction()
+//    {
+//        return $this->render('@Blog/Default/login.html.twig');
+//    }
+//
+//    public function registerAction()
+//    {
+//        return $this->render('@Blog/Default/register.html.twig');
+//    }
 
 
     

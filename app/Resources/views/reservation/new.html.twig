@@ -1,0 +1,75 @@
+{% extends 'basen1.html.twig' %}
+
+{% block body %}
+{% block title %} <div class="text-center" ><h1> Creation Reservation /h1> <br/> {% endblock %}
+  
+<br>
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Create" />
+    {{ form_end(form) }}
+
+    <ul>
+        <li>
+            <a href="{{ path('location_show',{'id':location.id}) }}">Retour</a>
+        </li>
+    </ul>
+{% endblock %}
+
+
+
+
+
+
+
+{% extends 'front.html.twig' %}
+{% block title %} <div class="text-center" ><h1> Reservation creation</h1> <br/> {% endblock %}
+{% block css %}
+
+{% endblock %}
+{% block main %}
+<section class="hero-slider">
+    <div class="hero-items owl-carousel">
+        <div class="single-slider-item set-bg" data-setbg="{{ asset('client/img/jpg1.jpg') }}">
+            <div class="container">
+                <div class="row">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    <p></p>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">&nbsp;</div>
+            <div class="col-md-6">
+                <div class="bg-light py-3 px-3">
+                    <h2 class="text-center">Fill For</h2>
+                    <form  method="post">
+
+                        <div class="form-group">
+                            <label for="date">Start date :</label>
+                            <input type="date" id="datedebut" name="datedebut" class="form-control" value="" required/>
+                        </div>
+                        <div class="form-group">
+                            <label for="date">End date:</label>
+                            <input type="date" id="datefin" name="datefin" class="form-control" required/>
+                        </div>
+
+                        <p></p>
+                        <div class="form-group">
+                            <input type="hidden" name="_target_path" value=""/>
+                            <input type="hidden" name="_csrf_token" value="" >
+                            <button type="submit" class="btn btn-primary">Add</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+{% endblock %}
+
+
+

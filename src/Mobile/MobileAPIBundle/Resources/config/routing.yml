@@ -1,0 +1,82 @@
+mobile_api_homepage:
+    path:     /api
+    defaults: { _controller: MobileAPIBundle:Default:index }
+
+
+locations_all:
+    path:     /locations/all/
+    defaults: { _controller: MobileAPIBundle:Location:all}
+
+
+locations_find:
+    path:     /locations/recherche/{id}
+    defaults: { _controller: MobileAPIBundle:Location:find}
+
+
+location_create:
+    path:     /location/new/{titre}/{lieu}/{prix}/{photo}/{dateCreation}/{username}
+    defaults: { _controller: MobileAPIBundle:Location:new}
+
+
+location_show:
+    path:     /location/show/{id}
+    defaults: { _controller: MobileAPIBundle:Location:show}
+
+
+location_update:
+    path:     /location/update/{id}/{titre}/{lieu}/{prix}/{photo}/{dateCreation}/{username}
+    defaults: { _controller: MobileAPIBundle:Location:update}
+
+location_delete:
+    path:     /location/delete/{id}
+    defaults: { _controller: MobileAPIBundle:Location:delete}
+
+
+reservations_all:
+    path:     /reservations/all
+    defaults: { _controller: MobileAPIBundle:Reservation:all}
+
+
+reservations_create:
+    path:     /reservation/new/{titre}/{dateDeb}/{dateFin}
+    defaults: { _controller: MobileAPIBundle:Reservation:new}
+
+reservation_show:
+    path:     /reservation/show/{id}
+    defaults: { _controller: MobileAPIBundle:Reservation:show}
+
+reservation_update:
+    path:     /reservation/update/{titre}/{dateDeb}/{dateFin}
+    defaults: { _controller: MobileAPIBundle:Reservation:update}
+
+reservation_delete:
+    path:     /reservation/delete/{id}
+    defaults: { _controller: MobileAPIBundle:Reservation:delete}
+
+reservation_find:
+    path:     /reservation/recherche/{id}
+    defaults: { _controller: MobileAPIBundle:Reservation:find}
+
+
+users_all:
+    path:     /users/all
+    defaults: { _controller: MobileAPIBundle:User:all}
+
+user_show:
+    path:     /profile
+    defaults: { _controller: MobileAPIBundle:User:show}
+
+user_find:
+    path:     /user/recherche/{id}
+    defaults: { _controller: MobileAPIBundle:User:find}
+
+
+user_register:
+    path:     /register
+    defaults: { _controller: MobileAPIBundle:User:new}
+
+user_update:
+    path:     /user/update/{id}
+    defaults: { _controller: MobileAPIBundle:User:update}
+
+

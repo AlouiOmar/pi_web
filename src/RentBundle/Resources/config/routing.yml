@@ -1,0 +1,101 @@
+rent_reservation:
+    resource: "@RentBundle/Resources/config/routing/reservation.yml"
+    prefix:   /reservation
+
+rent_location:
+    resource: "@RentBundle/Resources/config/routing/location.yml"
+    prefix:   /location
+
+homepage:
+    path:     /rent
+    defaults: { _controller: RentBundle:Default:home }
+
+admin_homepage:  
+    path:     /admin
+    defaults: { _controller: RentBundle:Admin:home }
+
+location_homepage:
+    path:     /location
+    defaults: { _controller: RentBundle:Location:index }
+
+location_new:
+    path:     /addRent
+    defaults: { _controller: RentBundle:Location:new }
+
+location_show:
+    path:     /showRent{id}
+    defaults: { _controller: RentBundle:Location:show }
+
+location_edit:
+    path:    /editRent{id}
+    defaults: { _controller: RentBundle:Location:edit }
+  
+location_delete:
+    path:    /deleteRent{id}
+    defaults: { _controller: RentBundle:Location:delete }
+
+location_confirmation:
+    path:     /confirme
+    defaults: { _controller: RentBundle:Location:confirme }
+
+location_search:
+    path:    /recherche
+    defaults: { _controller: RentBundle:Location:searchbytitle }
+
+tri_prix_asc:
+    path:     /tripasc
+    defaults: { _controller: RentBundle:Location:lowprix }
+
+tri_prix_Desc:
+    path:     /tripdesc
+    defaults: { _controller: RentBundle:Location:highprix }
+
+tri_date_asc:
+    path:     /tridateasc
+    defaults: { _controller: RentBundle:Location:lowdate }
+
+tri_date_Desc:
+    path:     /tridatedesc
+    defaults: { _controller: RentBundle:Location:highdate }
+   
+reservation_homepage:
+    path:     /reservation
+    defaults: { _controller: RentBundle:Reservation:index }
+   
+reservation_show:
+    path:    /showReserv{id}
+    defaults: { _controller: RentBundle:Reservation:show }
+  
+reservation_new:
+    path:     /addReserv
+    defaults: { _controller: RentBundle:Reservation:new }
+   
+reservation_edit:
+    path:     /editReserv{id}
+    defaults: { _controller: RentBundle:Reservation:edit }
+  
+reservation_delete:
+    path:     /deleteReserv{id}
+    defaults: { _controller: RentBundle:Reservation:delete }
+  
+reservation_notif:  
+    path:     /notif{id}
+    defaults: { _controller: RentBundle:Reservation:notif }
+
+      
+reservation_calendar:  
+    path:     /calend
+    defaults: { _controller: RentBundle:Reservation:reserver }
+
+reservation_accept:
+    path:     /accepter
+    defaults: { _controller: RentBundle:Reservation:accept }
+
+
+fullcalendar_loader:
+    path: /fc-load-events
+    defaults: { _controller: ADesignsCalendarBundle:Calendar:loadCalendar }
+    options:
+        expose: true
+adesigns_calendar:
+    resource: "@ADesignsCalendarBundle/Resources/config/routing.xml"

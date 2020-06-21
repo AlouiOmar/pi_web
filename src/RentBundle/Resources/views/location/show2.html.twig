@@ -1,0 +1,39 @@
+{% block body %}
+{% block title %}<div class="text-center" ><h1> location </h1> <br/>{% endblock %}
+<br>
+
+     <table class="table_striped">
+        <tbody>
+            <tr>
+                <th>Titre</th>
+                <td>{{ location.titre }}</td>
+            </tr>
+            <tr>
+                <th>Lieu</th>
+                <td>{{ location.lieu }}</td>
+            </tr>
+            <tr>
+                <th>Prix</th>
+                <td>{{ location.prix }}</td>
+            </tr>
+            <tr>
+                <th>Photo</th>
+                <td>{{ location.photo }}</td>
+            </tr>
+            <tr>
+                <th>Rating</th>
+                <td>{{ location.rating }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('location_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('location_edit', { 'id': location.id }) }}">Edit</a>
+        </li>
+      
+    </ul>
+{% endblock %}

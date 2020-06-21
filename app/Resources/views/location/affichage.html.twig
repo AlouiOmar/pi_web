@@ -1,0 +1,121 @@
+{% extends 'basen1.html.twig' %}
+{% block content %}
+<br>
+<br>
+<div class="product-item-filter row">
+
+    <div class="col-12 col-sm-8 text-center text-sm-left">
+
+
+        <span> <b> <font size="4" >Filtrer par : </font> </b></span>
+        <br>
+        <br>
+        <select id="pricehigh" onchange="price()" class="selectpicker" >
+
+            <option value="1">Tous les Produits</option>
+            <option value="2">High Price → Low Price</option>
+            <option value="3" >Low Price → High Price</option>
+
+
+        </select>
+
+
+
+
+    </div>
+
+
+</div>
+
+<br>
+
+/*  <td><a href="{{ path('location_show', { 'id': location.id }) }}">{{ location.id }}</a></td>
+<td></td>
+<td>{{ location.rating }}</td>
+<td>{{ location.rating }}</td>
+
+<td>{{ location.fosUser.username }}</td>
+<td>{{ location.fosUser.email }}</td>*/
+
+
+
+
+<div class="product-categorie-box">
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane fade show active" id="grid-view">
+            <div class="row">
+                {% for location in locations %}
+                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
+                    <div class="products-single fix" >
+                        <div class="border border-y rounded p-2" >
+                            <img src="{{ asset('/img')~location.photo}}"  class="rounded-lg" alt="Image" >
+                            <div class="box-img-hover">
+
+                                <div class="type-lb">
+                                    <p class="new">{{ location.titre }}</p>
+                                </div>
+
+                                <div class="why-text">
+                                    <h4>{{ location.prix }} DT</h4>
+                                </div>
+                            </div>
+
+                            <div class="why-text">
+                                <h4>{{ location.lieu }}</h4>
+                            </div>
+                        </div>
+
+                        <div class="why-text">
+                            <h4>publié le {{ location.dateCreation }}</h4>
+                        </div>
+                    </div>
+                    <div class="mask-icon">
+                        <ul>
+                            <li><a href="{{ path('location_edit'',{'id':location.id},{'titre':location.titre},{'photo':location.photo})}}" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
+                                        <li><a href="{{ path('location_show',{'id':location.id}) }}" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
+                                    </ul>
+
+                                    <a class="cart" href="{{ path('reservation_new',{'id':location.id}) }}"><i class="fas fa-shopping-cart"></i> Reserver</a>
+                                </div>
+                            </div>
+                            <br>
+                       </div>
+                    </div>
+                    <br>
+
+                {% endfor %}
+            </div>
+        </div>
+
+
+
+    </div>
+
+    <div class="pagination pagination-sm m-0 float-right ">
+        {{ knp_pagination_render(locations) }}
+    </div>
+</div>
+
+
+    <script>
+        function price() {
+            var selected = document.getElementById('pricehigh').options[document.getElementById('pricehigh').selectedIndex];
+            console.log(selected.value);
+            if(selected.value == 1) {
+                window.location.replace("{{ path('showProdClient') }}");
+            }
+            if(selected.value == 2) {
+                window.location.replace("{{ path('tri_prix_Desc') }}");
+            }
+            else if (selected.value == 3) {
+                window.location.replace("{{ path('tri_prix_asc') }}");
+            }else {
+                window.location.replace("{{ path('showProdClient') }}");
+            }
+
+        }
+    </script>
+
+
+
+{% endblock %}

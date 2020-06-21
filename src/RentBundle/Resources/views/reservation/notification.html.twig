@@ -1,0 +1,13 @@
+
+{# Call NotificationsBundles's assets #}
+{{ notifications_assets() }}
+<script>
+    /**
+     * This function will be triggered each time a data comes from the server
+     * Make sure you call it otherwise you won't get any data
+     * @param data contains your data sent from the server
+     */
+    function onNotificationsPushed(data){
+        console.log('data', data);
+    }
+</script>

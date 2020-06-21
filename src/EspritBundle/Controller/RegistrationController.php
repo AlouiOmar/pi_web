@@ -144,9 +144,12 @@ class RegistrationController extends BaseController
             $formatted = $serializer->normalize(array(
                 "id" => $user->getId(),
                 "username" => $user->getUsername(),
+                "nom" => $user->getNom(),
+                "prenom" => $user->getPrenom(),
                 "email" => $user->getEmail(),
-                //"telephone" => $user->getTelephone(),
+                "photo" => $user->getPhot(),
                 "roles" => $user->getRoles(),
+                "telephone" =>(string) $user->getTelephone(),
             ));
         }
         else
